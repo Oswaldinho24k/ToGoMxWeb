@@ -14,16 +14,16 @@ injectTapEventPlugin();
 
 const WithRouter =()=>(
   <BrowserRouter>
-      <App/>
+      <Main/>
   </BrowserRouter>
 );
 
 const Main = ()=>(
     <MuiThemeProvider>
-        <WithRouter/>
+        <App/>
     </MuiThemeProvider>
 );
 
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+ReactDOM.render(<WithRouter />, document.getElementById('root'));
 registerServiceWorker();
