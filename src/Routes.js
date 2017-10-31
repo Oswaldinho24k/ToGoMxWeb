@@ -8,14 +8,14 @@ import RegistroContainer from './components/login/RegistroContainer';
 
 
 const Routes = () => (
-    <Switch>xº
+    <Switch>
         <Route path="/inventario/:cat1/:cat2/:cat3" component={InventarioPage}/>
         <Route path="/inventario/:cat1/:cat2" component={InventarioPage}/>
         <Route path="/inventario/:cat1" component={InventarioPage}/>
         <Route path="/inventario/" component={InventarioPage}/>
         <Route path="/login" component={LoginContainer}/>
         <Route path="/registro" component={RegistroContainer}/>
-        <Route path="/caja" component={CajaComponent}/>
+        <Route path="/caja" component={CajaContainer}/>
 
     </Switch>
 );
