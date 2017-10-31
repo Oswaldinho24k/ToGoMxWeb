@@ -5,7 +5,7 @@ import React from 'react';
 import {RaisedButton, TextField, Card, CircularProgress} from 'material-ui';
 import {Link} from 'react-router-dom';
 
-export const LoginDisplay = ({loading=false}) => {
+export const LoginDisplay = ({loading=false, email, password, onLogin, onChange}) => {
     return (
 
         <div style={styles.tabla}>
@@ -16,14 +16,21 @@ export const LoginDisplay = ({loading=false}) => {
                     <h2>Inicia Sesión</h2>
                     <div style={styles.login}>
                         <TextField
+                            onChange={onChange}
+                            value={email}
+                            name="email"
                             type="text"
                             floatingLabelText={"Correo electrónico"}
                         />
                         <TextField
+                            onChange={onChange}
+                            value={password}
+                            name="password"
                             type="password"
                             floatingLabelText={"Contraseña"}
                         />
                         <RaisedButton
+                            onTouchTap={onLogin}
                             labelColor="white"
                             backgroundColor="orange"
                             label={loading ? <CircularProgress color="white" size={30}/>:"Iniciar Sesión"}

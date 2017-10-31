@@ -71,7 +71,10 @@ let tienda = this.state.tienda;
 
     registratTienda = (tienda) => {
         registrarTienda(tienda)
-            .then(r=>toastr.success("Se creó tu usuario y tienda"))
+            .then(r=>{
+                toastr.success("Se creó tu usuario y tienda");
+                this.props.history.push("/inventario");
+            })
             .catch(e=>{
                 toastr.error("Algo malo pasó", e);
                 console.log(e);
