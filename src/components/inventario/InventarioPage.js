@@ -55,10 +55,10 @@ class InventarioPage extends Component {
                     <CategoriesMenu match={this.props.match} history={this.props.history}/>
                 </Drawer>
                 <AppBar
-                    title="Title"
-                    iconElementLeft={<IconButton onClick={this.handleDrawerToggle}><Menu/></IconButton>}
-                    iconElementRight={<IconButton><Dots /></IconButton>}
-                />
+                title="Title"
+                iconElementLeft={<IconButton onClick={this.handleDrawerToggle}><Menu/></IconButton>}
+                iconElementRight={<IconButton><Dots /></IconButton>}
+            />
                 <h4>{params.cat1} / {params.cat2} / {params.cat3}</h4>
                 <ProductsList/>
                 <FloatingActionButton onTouchTap={this.handleOpenAddForm} className="add-form-button">

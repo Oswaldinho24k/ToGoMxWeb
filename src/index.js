@@ -7,6 +7,8 @@ import {BrowserRouter} from 'react-router-dom';
 import {MuiThemeProvider} from "material-ui";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+import 'toastr/build/toastr.css';
+
 
 
 injectTapEventPlugin();
