@@ -2,38 +2,78 @@
  * Created by BlisS on 22/03/17.
  */
 import React from 'react';
-import {RaisedButton, TextField} from 'material-ui';
+import {RaisedButton, TextField, Card, CircularProgress} from 'material-ui';
+import {Link} from 'react-router-dom';
 
-
-export const LoginDisplay = ({props}) => {
+export const LoginDisplay = ({loading=false}) => {
     return (
-        <div style={styles.container}>
-            <div style={styles.login}>
-                <TextField
-                    type="text"
-                    floatingLabelText="Correo electronico"
-                />
-                <TextField
-                    type="password"
-                    floatingLabelText="Contraseña"
-                />
-                <RaisedButton
-                    label="Iniciar Sesión"
-                />
+
+        <div style={styles.tabla}>
+            <div style={styles.centrado}>
+                <Card
+                    zDepth={5}
+                    style={styles.card}>
+                    <h2>Inicia Sesión</h2>
+                    <div style={styles.login}>
+                        <TextField
+                            type="text"
+                            floatingLabelText={"Correo electrónico"}
+                        />
+                        <TextField
+                            type="password"
+                            floatingLabelText={"Contraseña"}
+                        />
+                        <RaisedButton
+                            labelColor="white"
+                            backgroundColor="orange"
+                            label={loading ? <CircularProgress color="white" size={30}/>:"Iniciar Sesión"}
+                        />
+                    </div>
+                    <span>¿Olvidaste tu contraseña?, <Link to="/registro">Recuperala</Link></span>
+                    <br/>
+                   <span>¿No tienes cuenta?, <Link to="/registro">¡Crea una!</Link></span>
+
+                </Card>
             </div>
         </div>
+
+
     );
 };
 
 //LoginDisplay.propTypes = {};
 
 const styles = {
-    conatiner: {
-        width:"100%"
+    tabla: {
+        backgroundImage:"url('https://thumbs.dreamstime.com/z/seamless-background-grocery-shopping-pattern-colorful-cashier-sellers-cash-registers-baskets-paper-bags-fresh-73835477.jpg')",
+        backgroundSize:"cover",
+        display:"table",
+        width:"100%",
+        height:"100vh"
     },
+    card:{
+        paddingTop:"20px",
+        paddingBottom:"20px",
+        maxWidth:"420px",
+        margin:"0 auto"
+    },
+
+    centrado:{
+        display:"table-cell",
+        textAlign:"center",
+        verticalAlign:"middle",
+
+    },
+
     login:{
         maxWidth:"400px",
-        margin:"0 auto"
-    }
+        height:"300px",
+        margin:"0 auto",
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:"space-around"
+    },
+
 };
 
