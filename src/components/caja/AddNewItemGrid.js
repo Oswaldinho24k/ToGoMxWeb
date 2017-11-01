@@ -27,19 +27,14 @@ const AddNewItemGrid = (props) => {
         props.addNewItem(tile.producto);
     };
     const gridListProps = {
-        cellHeight: 150
+        cellHeight: 200,
+        padding: 10,
+        cols: 3
     };
     const productosGrid = formatearProductoAGrid(props.productos);
     return (
         <div>
-            {
-                props.categoria === '' &&
-                <GridList
-                    tilesData={props.categorias}
-                    onClick={changeCategoria}
-                    gridListProps={gridListProps}
-                />
-            }
+
             {
                 props.subcategoria === '' &&
                 <GridList

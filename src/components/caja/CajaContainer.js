@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import * as fakeFirebase from './fakeFirebase';
 import ProductsList from './ProductsList';
-import AddNewItem from "./AddNewItemGrid";
+import './CajaStyles.css';
+import ShowCategorias from "./ShowCategorias";
+import RutasLocales from "./RutasLocales";
 
 class CajaContainer extends Component {
     constructor(props) {
@@ -15,10 +17,6 @@ class CajaContainer extends Component {
             }
         };
     }
-
-    // handleDropDownChange = (event, index, value, name) => {
-    //     this.setState({[name]:value});
-    // };
 
     handleTouchPictures = (name,value) => {
         this.setState({[name]:value});
@@ -61,7 +59,18 @@ class CajaContainer extends Component {
         //
         // }
     };
-
+    changeCategoria = (tile) => {
+        this.handleTouchPictures('categoria',tile.value);
+        this.props.history.push(this.props.match.url + '/subcategorias');
+    };
+    changeSubcategoria = (tile) => {
+        this.handleTouchPictures('subcategoria',tile.value);
+        this.props.history.push(this.props.match.url + '/subsubcategorias');
+    };
+    changeSubsubcategoria = (tile) => {
+        this.handleTouchPictures('subsubcategoria',tile.value);
+        this.props.history.push(this.props.match.url + '/productos');
+    };
     render() {
         const {categoria,subcategoria, subsubcategoria} = this.state;
         let subcategorias = categoria !== '' ? this.getSubcategorias() : [];
@@ -73,18 +82,33 @@ class CajaContainer extends Component {
             { title: 'Precio', dataIndex: 'precio'},
             { title: 'Nombre', dataIndex: 'nombre'}
         ];
+        const url = this.props.match.url;
+        const categoriasComponent = () => (
+            <ShowCategorias
+                handleChange={this.changeCategoria}
+                items={fakeFirebase.categorias}
+            />
+        );
+        const subcategoriasComponent = () => (
+            <ShowCategorias
+                handleChange={this.changeSubcategoria}
+                items={subcategorias}
+            />
+        );
+        const subsubcategoriaComponent = () => (
+            <ShowCategorias
+                handleChange={this.changeSubsubcategoria}
+                items={subsubcategorias}
+            />
+        );
         return (
-            <div>
-                <AddNewItem
-                    categorias={fakeFirebase.categorias}
-                    categoria={categoria}
-                    subcategorias={subcategorias}
-                    subcategoria={subcategoria}
-                    subsubcategorias={subsubcategorias}
-                    subsubcategoria={subsubcategoria}
-                    productos={productos}
+            <div className="rootCajaContainer">
+                <RutasLocales
                     onClick={this.handleTouchPictures}
-                    addNewItem={this.addNewItem}
+                    url={url}
+                    categoriasComponent={categoriasComponent}
+                    subcategoriasComponent={subcategoriasComponent}
+                    subsubcategoriasComponent={subsubcategoriaComponent}
                 />
                 <ProductsList
                     columnas={columnas}

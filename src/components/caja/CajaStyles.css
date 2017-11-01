@@ -1,0 +1,14 @@
+.rootCajaContainer {
+    padding: 50px 5vw 0px 5vw;
+}
+
+.grid-list{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.lista-productos{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2%;
+}
