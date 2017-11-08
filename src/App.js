@@ -36,7 +36,7 @@ class App extends Component {
             iconElementLeft={<IconButton onClick={this.handleDrawerToggle}><Menu/></IconButton>}
             iconElementRight={<IconButton><Dots /></IconButton>}
         />
-          <Notifications/>
+          <Notifications />
        <Routes/>
       </div>
     );
