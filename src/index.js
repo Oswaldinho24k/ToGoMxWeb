@@ -10,9 +10,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import {configureStore} from "./redux/store/configureStore";
 import {Provider} from 'react-redux';
 import 'toastr/build/toastr.css';
+import {getNotifications} from "./redux/actions/notificationActions";
 injectTapEventPlugin();
 
 const store = configureStore();
+store.dispatch(getNotifications());
 
 
 

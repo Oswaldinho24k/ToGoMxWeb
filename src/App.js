@@ -8,6 +8,7 @@ import Close from 'material-ui/svg-icons/navigation/close';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import CategoriesMenu from './components/inventario/CategoriesMenu';
+import Notifications from "./components/notifications/Notifications";
 
 
 
@@ -21,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <p>la notificación</p>
+
         <Drawer
             open={this.state.drawer}
             className="drawer-categorias">
@@ -35,6 +36,7 @@ class App extends Component {
             iconElementLeft={<IconButton onClick={this.handleDrawerToggle}><Menu/></IconButton>}
             iconElementRight={<IconButton><Dots /></IconButton>}
         />
+          <Notifications/>
        <Routes/>
       </div>
     );
