@@ -16,7 +16,7 @@ class LoginContainer extends Component{
     componentWillMount(){
         firebase.auth().onAuthStateChanged(user=>{
             if(user){
-                this.props.history.push("/inventario");
+                this.props.history.push("/perfil");
             }
         })
     }
@@ -29,17 +29,20 @@ class LoginContainer extends Component{
         this.setState({auth});
     };
 
-    onLogin = () => {
-        const auth = this.state.auth
+    onLogin = (e) => {
+        e.preventDefault();
+        const auth = this.state.auth;
         this.setState({loading:true});
         firebase.auth().signInWithEmailAndPassword(auth.email, auth.password)
             .then(()=>{
                 toastr.success("Bienvenido");
-                this.props.history.push("/inventario");
+                //this.props.history.push("/perfil");
             })
             .catch(e=>{
                 console.log(e);
-                toastr.error("algo malo pasó ",e);
+                if(e.message === "There is no user record corresponding to this identifier. The user may have been deleted.") e.message = "Este usuario no existe, crea tu cuenta";
+                if(e.message === "The password is invalid or the user does not have a password.") e.message = "Tu contraseña no es correcta";
+                toastr.error(e.message);
                 this.setState({loading:false});
             });
     };

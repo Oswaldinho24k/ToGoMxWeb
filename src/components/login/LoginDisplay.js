@@ -9,7 +9,7 @@ export const LoginDisplay = ({loading=false, email, password, onLogin, onChange}
     return (
 
         <div style={styles.tabla}>
-            <div style={styles.centrado}>
+            <form onSubmit={onLogin} style={styles.centrado}>
                 <Card
                     zDepth={5}
                     style={styles.card}>
@@ -30,7 +30,7 @@ export const LoginDisplay = ({loading=false, email, password, onLogin, onChange}
                             floatingLabelText={"Contraseña"}
                         />
                         <RaisedButton
-                            onTouchTap={onLogin}
+                            type="submit"
                             labelColor="white"
                             backgroundColor="orange"
                             label={loading ? <CircularProgress color="white" size={30}/>:"Iniciar Sesión"}
@@ -41,7 +41,7 @@ export const LoginDisplay = ({loading=false, email, password, onLogin, onChange}
                    <span>¿No tienes cuenta?, <Link to="/registro">¡Crea una!</Link></span>
 
                 </Card>
-            </div>
+            </form>
         </div>
 
 

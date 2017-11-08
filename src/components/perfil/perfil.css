@@ -1,0 +1,96 @@
+.profile-cover{
+    width: 100%;
+    height: 300px;
+    background-color: red;
+    position: relative;
+}
+
+.profile-cover figure img{
+    width:100px;
+    border-radius: 50%;
+    border:4px solid white;
+    position: absolute;
+    bottom:-30px;
+    left:50px;
+    transition: all 5s ease;
+}
+
+.profile-cover figure img:hover{
+    filter: grayscale(100%);
+    cursor: pointer;
+}
+
+
+
+.profile-cover button{
+    border: none;
+    outline: none;
+    background: rgba(0,0,0,0.3);
+    color:white;
+    padding: 15px;
+    text-transform: uppercase;
+    transition: all .3s ease;
+    position: absolute;
+    top:20px;
+    left:20px;
+}
+
+.profile-cover button:hover{
+    background: rgba(0,0,0,0.7);
+    cursor: pointer;
+}
+
+.profile-cover label{
+    position: absolute;
+    bottom:-10px;
+    left: 200px;
+    color: white;
+    text-align: left;
+}
+
+.profile-cover label input{
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width:320px;
+    color:grey;
+}
+
+/*Form*/
+.username-form{
+    display: none;
+}
+.profile-form{
+    text-align: left;
+    padding-left: 150px;
+    max-width: 500px;
+}
+.profile-form input{
+    outline: none;
+    border: 0.5px solid grey;
+    padding: 10px;
+    border-radius: 5px;
+    /*width:500px;*/
+    width: 80%;
+    color:grey;
+}
+
+.profile-form label p{
+    color: #b1b1b1;
+}
+
+@media(max-width: 600px){
+    .profile-cover figure img{
+        left:35%;
+    }
+    .profile-form{
+        padding-left: 20px;
+    }
+    .username-absolute{
+        display: none;
+    }
+    .username-form{
+        display: inherit;
+    }
+}

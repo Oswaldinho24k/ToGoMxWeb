@@ -28,3 +28,8 @@ export async function registrarTienda(tienda){
 
 
 }
+
+export function signOut(){
+    firebase.auth().signOut();
+    localStorage.removeItem("user");
+}
