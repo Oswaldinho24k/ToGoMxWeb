@@ -6,7 +6,7 @@ function alertasReducer(state=[], action){
           //  return [...state, action.notification];
 
         case GET_NOTIFICATIONS_SUCCESS:
-            return state;
+            return [...state, action.notification];
 
         default:
             return state;
