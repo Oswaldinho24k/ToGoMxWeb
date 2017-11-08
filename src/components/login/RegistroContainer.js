@@ -93,8 +93,10 @@ let tienda = this.state.tienda;
                 this.props.history.push("/inventario");
             })
             .catch(e=>{
-                toastr.error("Algo malo pasó", e);
-                console.log(e);
+                if(e.message === "Password should be at least 6 characters") e.message = "Tu password debe contener al menos 6 caracteres";
+                if(e.message === "The email address is already in use by another account.") e.message = "Este correo electónico ya está en uso por otro usuario";
+                toastr.error(e.message);
+                console.log("que mierda?", e.message);
             })
     };
 
