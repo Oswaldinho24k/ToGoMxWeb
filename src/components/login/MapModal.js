@@ -7,15 +7,24 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 
 
 const MyMapComponent = withScriptjs(withGoogleMap(({tienda, dragged, isMarkerShown, lat=20.134484, lng=-98.802704, markerLat=20.1324695, markerLng=-98.8009663}) =>
-    <GoogleMap
-        defaultZoom={14}
-        defaultCenter={{ lat: 20.134484, lng: -98.802704 }}
-    >
-        {isMarkerShown && <Marker
-            draggable={true}
-            onDragEnd={dragged}
-            position={tienda} />}
-    </GoogleMap>
+{
+    // const googleMaps = window.google.maps;
+    // const geocoder = new googleMaps.Geocoder();
+    // geocoder.geocode({'location': NY},
+    //     r=>console.log(r)
+    // );
+    // console.log(geocoder);
+   return(<GoogleMap
+       defaultZoom={14}
+       defaultCenter={tienda}
+   >
+       {isMarkerShown && <Marker
+           draggable={true}
+           onDragEnd={dragged}
+           position={tienda} />}
+
+   </GoogleMap>);
+}
 ));
 
 
