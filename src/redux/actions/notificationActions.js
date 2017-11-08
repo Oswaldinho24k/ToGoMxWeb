@@ -25,16 +25,20 @@ export function newNotification(notification){
 
 export const GET_NOTIFICATIONS_SUCCESS = 'GET_NOTIFICATIONS_SUCCESS';
 
-export function getNotificationsSuccess(notifications){
+export function getNotificationsSuccess(notification){
     return{
-        type:GET_NOTIFICATIONS_SUCCESS, notifications
+        type:GET_NOTIFICATIONS_SUCCESS, notification
     }
 }
 
 export function getNotifications(){
     return function(dispatch, getState){
+        console.log('me ejecuto');
         return firebase.database().ref('notifications').orderByChild('tiendaId').equalTo('-KySKSf5kuiiCj_ISqHR').on('child_added', snap=>{
+            console.log('the snap',snap.val());
             dispatch(getNotificationsSuccess(snap.val()))
+        },e => {
+            console.log(e);
         })
     }
 }
