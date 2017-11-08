@@ -11,6 +11,7 @@ import {signOut} from "./firebase";
 import {withRouter} from 'react-router-dom';
 
 import CategoriesMenu from './components/inventario/CategoriesMenu';
+import Notifications from "./components/notifications/Notifications";
 
 import './App.css';
 const Logged = ({signOut, goTo}) => (
@@ -49,6 +50,7 @@ class App extends Component {
     render() {
     return (
       <div className="App">
+
         <Drawer
             open={this.state.drawer}
             className="drawer-categorias">
@@ -62,6 +64,7 @@ class App extends Component {
             iconElementLeft={<IconButton onClick={this.handleDrawerToggle}><Menu/></IconButton>}
             iconElementRight={<Logged goTo={this.goTo} signOut={this.signOut} />}
         />
+          <Notifications/>
        <Routes/>
       </div>
     );

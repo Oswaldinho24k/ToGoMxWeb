@@ -15,6 +15,9 @@ class InventarioPage extends Component {
     state={
         drawer:false,
         addForm:false,
+        products:[],
+        newProduct:{},
+        updateProduct:{}
     };
 
     handleDrawerToggle = () => this.setState({drawer: !this.state.drawer});
@@ -25,6 +28,9 @@ class InventarioPage extends Component {
 
     handleCloseAddForm = () => {
         this.setState({addForm: false});
+    };
+    newProduct=()=>{
+        
     };
 
 
@@ -46,7 +52,7 @@ class InventarioPage extends Component {
         ];
         return (
             <div>
-                <Drawer
+                {/*<Drawer
                     open={this.state.drawer}
                     className="drawer-categorias">
                     <span className="close-menu-button">
@@ -58,7 +64,7 @@ class InventarioPage extends Component {
                 title="Title"
                 iconElementLeft={<IconButton onClick={this.handleDrawerToggle}><Menu/></IconButton>}
                 iconElementRight={<IconButton><Dots /></IconButton>}
-            />
+            />*/}
                 <h4>{params.cat1} / {params.cat2} / {params.cat3}</h4>
                 <ProductsList/>
                 <FloatingActionButton onTouchTap={this.handleOpenAddForm} className="add-form-button">

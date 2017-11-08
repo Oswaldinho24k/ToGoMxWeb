@@ -5,6 +5,7 @@ import CajaContainer from "./components/caja/CajaContainer";
 import LoginContainer from "./components/login/LoginContainer";
 import RegistroContainer from './components/login/RegistroContainer';
 import PerfilPage from './components/perfil/PerfilPage';
+import AdminPage from './components/admin/AdminPage';
 
 
 
@@ -18,6 +19,7 @@ const Routes = () => (
         <Route path="/registro" component={RegistroContainer}/>
         <Route path="/caja" component={CajaContainer}/>
         <Route path="/perfil" component={PerfilPage} />
+            <Route path="/admin" component={AdminPage}/>
 
     </Switch>
 );
