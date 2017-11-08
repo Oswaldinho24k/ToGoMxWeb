@@ -21,6 +21,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+          <p>la notificación</p>
         <Drawer
             open={this.state.drawer}
             className="drawer-categorias">
