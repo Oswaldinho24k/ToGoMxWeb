@@ -3,10 +3,10 @@ import {RegistroDisplay} from "./RegistroDisplay";
 import {registrarTienda} from '../../firebase';
 import toastr from 'toastr';
 
-const NY = {
-    lat:20.134484,
-    lng:-98.802704
-};
+//const NY = {
+  //  lat:20.134484,
+    //lng:-98.802704
+//};
 
 class RegistroContainer extends Component{
 
