@@ -34,9 +34,17 @@ export function getNotificationsSuccess(notification){
 export function getNotifications(){
     return function(dispatch, getState){
         console.log('me ejecuto');
-        return firebase.database().ref('notifications').orderByChild('tiendaId').equalTo('-KySKSf5kuiiCj_ISqHR').on('child_added', snap=>{
-            console.log('the snap',snap.val());
-            dispatch(getNotificationsSuccess(snap.val()))
+        return firebase.database().ref('notifications')
+            .orderByChild('tiendaId')
+            .equalTo('-KyS_8R9StjgDEYqfkQv')
+            .on('child_added', snap=>{
+                let n = snap.val();
+                n['key']=snap.key;
+                console.log('the snap',n);
+                if (!n.visto){
+                    dispatch(getNotificationsSuccess(n))
+                }
+
         },e => {
             console.log(e);
         })

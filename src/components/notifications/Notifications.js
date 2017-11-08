@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import swal from 'sweetalert2';
 
 class Notifications extends Component {
     constructor(props, context) {
@@ -11,7 +12,12 @@ class Notifications extends Component {
         console.log(this.props.notifications);
         return (
             <div>
-                las notis
+                {this.props.notifications.map((n, key)=>{
+                    return(
+                        <p key={key}>{n.key}</p>
+
+                    )
+                })}
             </div>
         );
     }

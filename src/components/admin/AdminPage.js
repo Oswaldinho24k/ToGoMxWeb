@@ -11,7 +11,8 @@ class AdminPage extends Component {
 
     enviarNoti=()=>{
         let noti={
-            tiendaId:'-KySKSf5kuiiCj_ISqHR',
+            visto:false,
+            tiendaId:'-KyS_8R9StjgDEYqfkQv',
             items:[
                 {producto:'refresco',
                 cantidad:2},
