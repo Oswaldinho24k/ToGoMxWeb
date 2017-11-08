@@ -3,6 +3,11 @@ import {RegistroDisplay} from "./RegistroDisplay";
 import {registrarTienda} from '../../firebase';
 import toastr from 'toastr';
 
+const NY = {
+    lat:20.134484,
+    lng:-98.802704
+};
+
 class RegistroContainer extends Component{
 
     state = {
@@ -17,7 +22,8 @@ class RegistroContainer extends Component{
             email2:"",
             password:"",
             password2:"",
-            tipo:"tienda"
+            tipo:"tienda",
+            direccion:''
         }
     };
 
@@ -25,10 +31,21 @@ class RegistroContainer extends Component{
 let tienda = this.state.tienda;
        tienda.lat = e.latLng.lat();
         tienda.lng = e.latLng.lng();
-        this.setState({tienda});
+
         console.log(this.state.tienda);
 
+        const googleMaps = window.google.maps;
+        const geocoder = new googleMaps.Geocoder();
+        geocoder.geocode({'location': tienda},
+            r=>{
+            console.log(r);
+            tienda.direccion = r[0].formatted_address;
+            }
+        );
+        console.log(geocoder);
 
+
+        this.setState({tienda});
      //   console.log(this.state.tienda);
        // console.log(e);
     };
