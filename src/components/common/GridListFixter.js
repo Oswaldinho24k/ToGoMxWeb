@@ -21,6 +21,7 @@ const GridListFixter = (props) => {
     return (
         <div>
             <GridList
+                className="grid-list"
                 {... props.gridListProps}
             >
                 <Subheader>{props.subheader}</Subheader>
