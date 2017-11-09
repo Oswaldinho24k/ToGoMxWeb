@@ -14,13 +14,12 @@ import {getNotifications} from "./redux/actions/notificationActions";
 import '../node_modules/sweetalert2/dist/sweetalert2.min.css';
 import '../node_modules/alertify.js/src/css/alertify.css';
 import {getTiendas} from "./redux/actions/tiendasActions";
+import {comprobarUsuario} from "./redux/actions/userActions";
 injectTapEventPlugin();
 
 const store = configureStore();
-store.dispatch(getNotifications());
-store.dispatch(getTiendas())
-
-
+store.dispatch(comprobarUsuario());
+store.dispatch(getTiendas());
 
 const WithRouter =()=>(
   <BrowserRouter>

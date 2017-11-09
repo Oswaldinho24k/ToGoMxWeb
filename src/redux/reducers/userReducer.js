@@ -1,10 +1,22 @@
-import {LOG_IN_SUCCESS} from '../actions/userActions';
-
-export function userReducer(state={}, action){
+export default function usuarioReducer ( state = null , action ){
     switch(action.type){
-        case LOG_IN_SUCCESS:
-            return action.user;
+        case "INICIAR_SESION":
+            if (action.user) {
+                return action.usuario;
+            }else{
+                return null;
+            }
+
+        case "COMPROBAR_USUARIO":
+            if (action.usuario) {
+                return action.usuario;
+            }else{
+                return null;
+            }
+
+        case "CERRAR_SESION":
+            return  null;
         default:
-            return state
+            return state;
     }
 }

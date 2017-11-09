@@ -34,9 +34,10 @@ export function getNotificationsSuccess(notification){
 export function getNotifications(){
     return function(dispatch, getState){
         console.log('me ejecuto');
+        console.log(getState());
         return firebase.database().ref('notifications')
             .orderByChild('tiendaId')
-            .equalTo(getState.user.key)
+            .equalTo(getState().user.key)
             .on('child_added', snap=>{
                 let n = snap.val();
                 n['key']=snap.key;

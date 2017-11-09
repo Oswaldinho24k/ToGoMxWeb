@@ -59,7 +59,7 @@ class LoginContainer extends Component{
         const auth = this.state.auth;
         this.setState({loading:true});
 
-        this.props.userActions.logInAction(auth.email, auth.password)
+        this.props.userActions.iniciarSesion(auth)
             .then(()=>{
                 toastr.success("Bienvenido");
                 //this.props.history.push("/perfil");
