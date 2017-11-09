@@ -9,9 +9,10 @@ class AdminPage extends Component {
         super(props, context);
     }
 
-    enviarNoti=()=>{
+    enviarNoti=(key)=>{
         let noti={
-            tiendaId:'-KySKSf5kuiiCj_ISqHR',
+            visto:false,
+            tiendaId:key,
             items:[
                 {producto:'refresco',
                 cantidad:2},
@@ -27,10 +28,21 @@ class AdminPage extends Component {
         })
     };
 
+
     render() {
+        console.log(this.props.tiendas)
         return (
             <div>
-                <RaisedButton onClick={this.enviarNoti}>Enviar</RaisedButton>
+                {this.props.tiendas.map(tienda=>{
+                    return(
+                        <div>
+                            <RaisedButton onClick={()=>this.enviarNoti(tienda.key)}>{tienda.title}</RaisedButton>
+                            <br/>
+
+                        </div>
+                    )
+                })}
+
             </div>
         );
     }
@@ -39,7 +51,8 @@ class AdminPage extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        state: state
+        tiendas:state.tiendas,
+        fetched:state.tiendas!==undefined
     }
 }
 

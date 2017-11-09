@@ -64,7 +64,7 @@ class App extends Component {
             iconElementLeft={<IconButton onClick={this.handleDrawerToggle}><Menu/></IconButton>}
             iconElementRight={<Logged goTo={this.goTo} signOut={this.signOut} />}
         />
-          <Notifications/>
+          <Notifications />
        <Routes/>
       </div>
     );
