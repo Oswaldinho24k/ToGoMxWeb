@@ -32,10 +32,30 @@ export const PerfilDisplay = ({props}) => {
                     <p>Lo usamos para enviarte notificaciones</p>
                 </label>
                 <label className="">
-                    <h5>Tu dirección</h5>
-                    <input placeholder="New York" type="text"/>
-                    <p>Donde vives?</p>
+                    <h5>Tu teléfono</h5>
+                    <input placeholder="7712343434" type="text"/>
+                    <p>¿A donde podemos llamarte?</p>
                 </label>
+            </form>
+
+            <form className="profile-form">
+                <div className="divider"></div>
+                <label>
+                    <h5>Tu password Actual</h5>
+                    <input type="password"/>
+                </label>
+                <label>
+                    <h5>Tu Nuevo password</h5>
+                    <input type="password"/>
+                </label>
+                <label>
+                    <h5>Verifica tu password</h5>
+                    <input type="password"/>
+                </label>
+                <button>
+                    Cambiar Password
+                </button>
+
             </form>
         </div>
     );
