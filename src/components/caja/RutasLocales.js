@@ -4,7 +4,7 @@ import ProductsList from '../inventario/ProductsList';
 
 const RutasLocales = ({ url, categoriasComponent,subcategoriasComponent, subsubcategoriasComponent}) => {
     const urlCategorias = url + '/categorias';
-    const urlSubcategorias = url + '/subcategorias';
+    const urlSubcategorias = url + 'categorias/subcategorias';
     const urlSubsubcategorias = url + '/subsubcategorias';
     const urlProductos = url + '/productos';
     return (
