@@ -11,11 +11,13 @@ import {configureStore} from "./redux/store/configureStore";
 import {Provider} from 'react-redux';
 import 'toastr/build/toastr.css';
 import {getNotifications} from "./redux/actions/notificationActions";
-
+import '../node_modules/sweetalert2/dist/sweetalert2.min.css';
+import {getTiendas} from "./redux/actions/tiendasActions";
 injectTapEventPlugin();
 
 const store = configureStore();
 store.dispatch(getNotifications());
+store.dispatch(getTiendas())
 
 
 
