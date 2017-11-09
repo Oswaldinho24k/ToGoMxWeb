@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import swal from 'sweetalert2';
+import alertify from 'alertify.js';
 
 class Notifications extends Component {
     constructor(props, context) {
@@ -37,7 +38,11 @@ class Notifications extends Component {
         console.log(this.props.notifications);
         let modals=[];
         for(let notification of this.props.notifications){
-           modals.push(this.monAlert(notification));
+            alertify.confirm(notification.key, function () {
+                console.log("voy");
+            }, function() {
+                console.log('no voy');
+            });
         }
         swal.queue(modals);
 

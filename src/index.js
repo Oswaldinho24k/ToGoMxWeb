@@ -12,6 +12,7 @@ import {Provider} from 'react-redux';
 import 'toastr/build/toastr.css';
 import {getNotifications} from "./redux/actions/notificationActions";
 import '../node_modules/sweetalert2/dist/sweetalert2.min.css';
+import '../node_modules/alertify.js/src/css/alertify.css';
 import {getTiendas} from "./redux/actions/tiendasActions";
 injectTapEventPlugin();
 
