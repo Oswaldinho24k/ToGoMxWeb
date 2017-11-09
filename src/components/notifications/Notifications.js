@@ -3,49 +3,40 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import swal from 'sweetalert2';
 import alertify from 'alertify.js';
+import * as notificationsActions from '../../redux/actions/notificationActions';
 
 class Notifications extends Component {
     constructor(props, context) {
         super(props, context);
     }
-    nel=()=>{
-        console.log('mi boton')
-    }
-    monAlert=(n)=>{
-        let lista = n.items.map( item => {
-            console.log(item);
-            return `<li>${item.producto}</li>`
+
+    monAlert = (notification) =>{
+        let itemsList = notification.items.map( (item,key) => {
+            return `<li key=${key}>${item.producto}</li>`;
         }).join('');
-        let dismiss='';
+        const msg = `<h3>¡Hola! ¿Tienes los siguientes productos?</h3> ` +
+            `<ul>${itemsList}</ul>`;
+        console.log('msg', msg);
 
-
-        return {
-            html: `<ul>${lista}</ul>`,
-            title: "Tienes o me voy con el vecino",
-            timer: 5000,
-            allowOutsideClick: false,
-            type: 'question',
-            showCancelButton: false,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'simón, jalate!',
-            cancelButtonText:'Nel ni madres',
-
-        };
+        alertify
+            .okBtn('Yep')
+            .cancelBtn('Nope')
+            .confirm(msg,  () => {
+                console.log("voy");
+                this.props.notificationsActions.markAsRead(notification);
+            },  () => {
+                console.log('no voy');
+                this.props.notificationsActions.markAsRead(notification);
+            });
     };
 
     render() {
         console.log(this.props.notifications);
-        let modals=[];
-        for(let notification of this.props.notifications){
-            alertify.confirm(notification.key, function () {
-                console.log("voy");
-            }, function() {
-                console.log('no voy');
-            });
+        if( this.props.notifications !== undefined && this.props.notificationsActions !== undefined) {
+            for (let notification of this.props.notifications) {
+                this.monAlert(notification);
+            }
         }
-        swal.queue(modals);
-
         return (
             <div>
                 holi
@@ -64,8 +55,9 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        //actions: bindActionCreators(actions, dispatch)
+        notificationsActions: bindActionCreators(notificationsActions, dispatch)
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
+Notifications = connect(mapStateToProps, mapDispatchToProps)(Notifications);
+export default Notifications;

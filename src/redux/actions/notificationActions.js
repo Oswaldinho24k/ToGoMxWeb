@@ -50,3 +50,26 @@ export function getNotifications(){
         })
     }
 }
+
+export const MARK_AS_READ = 'MARK_AS_READ';
+
+export function markAsReadSuccess(notification) {
+    return {
+        type: MARK_AS_READ,
+        notification
+    }
+}
+
+export function markAsRead(notification) {
+    return function (dispatch, getState) {
+        let updates = {};
+        let notificationRead = notification;
+        notificationRead['visto'] = true;
+        updates['/notifications/'  +  notification.key] = notificationRead;
+        return firebase.database().ref().update(updates)
+            .then(()=>{
+                //console.log('chet');
+                dispatch(markAsReadSuccess(notificationRead));
+            });
+    }
+}
