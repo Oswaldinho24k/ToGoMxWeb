@@ -52,7 +52,7 @@ export const LoginDisplay = ({loading=false, email, password, onLogin, onChange}
 
 const styles = {
     tabla: {
-        backgroundImage:"url('https://thumbs.dreamstime.com/z/seamless-background-grocery-shopping-pattern-colorful-cashier-sellers-cash-registers-baskets-paper-bags-fresh-73835477.jpg')",
+        backgroundImage:"url('http://cdn.wonderfulengineering.com/wp-content/uploads/2016/01/Desktop-Wallpaper-4.jpg')",
         backgroundSize:"cover",
         display:"table",
         width:"100%",

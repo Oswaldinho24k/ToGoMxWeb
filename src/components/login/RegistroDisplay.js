@@ -142,7 +142,8 @@ const styles = {
         maxWidth:"80%",
         margin:"0 auto",
         padding:"40px",
-        marginTop:"40px"
+        marginTop:"40px",
+
     },
     form: {
         display:"flex",

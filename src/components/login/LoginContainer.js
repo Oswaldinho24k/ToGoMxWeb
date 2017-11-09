@@ -13,10 +13,32 @@ class LoginContainer extends Component{
         }
     };
 
+    decideRoute = () => {
+        const search = this.props.location.search;
+        if(search){
+            const params = new URLSearchParams(search);
+            const next = params.get('next');
+            //console.log(next);
+            if(next){
+                this.routeNext(next);
+            }
+        } else{
+            this.routeNatural();
+        }
+    };
+
+    routeNext = (next) => {
+        this.props.history.push(next);
+    };
+
+    routeNatural = () => {
+        this.props.history.push("/");
+    };
+
     componentWillMount(){
         firebase.auth().onAuthStateChanged(user=>{
             if(user){
-                this.props.history.push("/perfil");
+                this.decideRoute();
             }
         })
     }
