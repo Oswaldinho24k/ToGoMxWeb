@@ -36,7 +36,7 @@ class AdminPage extends Component {
                 {this.props.tiendas.map(tienda=>{
                     return(
                         <div>
-                            <RaisedButton onClick={()=>this.enviarNoti(tienda.key)}>{tienda.title}</RaisedButton>
+                            <RaisedButton onClick={()=>this.enviarNoti(tienda.owner)}>{tienda.title}</RaisedButton>
                             <br/>
 
                         </div>
