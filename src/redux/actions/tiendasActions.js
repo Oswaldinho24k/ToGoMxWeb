@@ -2,6 +2,8 @@ import firebase from '../../firebase';
 
 //read notifications
 export const GET_TIENDAS_SUCCESS = 'GET_TIENDAS_SUCCESS';
+export const ADD_TIENDA_TO_PROFILE_SUCCESS = "ADD_TIENDA_TO_PROFILE_SUCCESS";
+export const REMOVE_TIENDA_FROM_PERFIL = "REMOVE_TIENDA_FROM_PERFIL";
 
 export function getTiendasSuccess(tienda){
     return{

@@ -86,7 +86,7 @@ export function cerrarSesion() {
         return firebase.auth().signOut()
             .then( (r) => {
                 console.log('Ya sali ', r);
-                dispatch(cerrarSesionAction(null));
+                dispatch(cerrarSesionAction({}));
             }).catch( (error) => {
                 console.error('No pude salir');
             });

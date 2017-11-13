@@ -87,6 +87,7 @@ let tienda = this.state.tienda;
     };
 
     registratTienda = (tienda) => {
+        tienda["coord"] = {latitude:tienda.lat, longitude:tienda.lng};
         registrarTienda(tienda)
             .then(r=>{
                 toastr.success("Se creó tu usuario y tienda");
