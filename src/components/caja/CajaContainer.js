@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import * as fakeFirebase from './fakeFirebase';
-import ProductsList from './ProductsList';
+import ProductsList from './ShowProductosToSell';
+import ProductsListCards from '../inventario/ProductsList';
 import './CajaStyles.css';
 import ShowCategorias from "./ShowCategorias";
 import RutasLocales from "./RutasLocales";
+import {bindActionCreators} from "redux";
+import * as productsActions from '../../redux/actions/productsActions';
+import {connect} from "react-redux";
 
 class CajaContainer extends Component {
     constructor(props) {
@@ -110,6 +114,10 @@ class CajaContainer extends Component {
                     subcategoriasComponent={subcategoriasComponent}
                     subsubcategoriasComponent={subsubcategoriaComponent}
                 />
+                <ProductsListCards
+                    columnas={columnas}
+                    products={this.props.products}
+                />
                 <ProductsList
                     columnas={columnas}
                     productos={itemsVenta}
@@ -119,4 +127,22 @@ class CajaContainer extends Component {
     }
 }
 
+function mapStateToProps(state,oP){
+    let pathname = oP.location.pathname;
+    pathname = pathname.replace('caja','inventario');
+    let products = state.products.filter(filtrado=>{
+        return filtrado.category=== pathname;
+    });
+    return{
+        products:products,
+        bar:state.bar,
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return{
+        productsActions:bindActionCreators(productsActions, dispatch)
+    }
+}
+
+CajaContainer = connect(mapStateToProps,mapDispatchToProps) (CajaContainer);
 export default CajaContainer;
