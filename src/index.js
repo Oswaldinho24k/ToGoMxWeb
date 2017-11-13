@@ -18,7 +18,7 @@ import {comprobarUsuario} from "./redux/actions/userActions";
 import {getAllProducts} from "./redux/actions/productsActions";
 injectTapEventPlugin();
 
-const store = configureStore();
+export const store = configureStore();
 store.dispatch(comprobarUsuario());
 store.dispatch(getTiendas());
 

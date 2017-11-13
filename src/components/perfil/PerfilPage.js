@@ -1,22 +1,37 @@
-//import React, {Component} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PerfilDisplay} from './PerfilDisplay';
 import firebase from '../../firebase';
+import {misTiendasWatcher} from '../../watchers';
 
 
+class PerfilPage extends Component{
+    componentWillMount(){
+        firebase.auth().onAuthStateChanged(user=>{
+            if(!user){
+                this.props.history.push("/login?next=/perfil");
+
+            }
+            const userUid = firebase.auth().currentUser.uid;
+            const userRef = firebase.database().ref("users").child(userUid);
+            misTiendasWatcher(userRef);
+        });
+
+    }
+    render(){
+        if(!this.props.fetched) return <h2>Cargando...</h2>;
+        return(
+            <PerfilDisplay {...this.props} />
+        );
+    }
+}
 
 function mapStateToProps(state, ownProps) {
-    //const user = localStorage.getItem("user");
-    //debugger;
-    //if(!user) ownProps.history.push("/login?next=/perfil");
-    firebase.auth().onAuthStateChanged(user=>{
-        if(!user){
-            ownProps.history.push("/login?next=/perfil");
-        }
-    });
+    console.log(state);
     return {
-        state: state
+        ...state.user,
+        fetched:Object.keys(state.user).length > 0 && state.user.tiendas !== undefined
     };
 }
 
@@ -26,5 +41,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-const PerfilPage = connect(mapStateToProps, mapDispatchToProps)(PerfilDisplay);
-export default PerfilPage;
+export default PerfilPage = connect(mapStateToProps, mapDispatchToProps)(PerfilPage);
