@@ -82,9 +82,10 @@ class CajaContainer extends Component {
         let productos = subsubcategoria !== '' ? this.getProductos(): [];
         let {venta} = this.state;
         const columnas = [
-            { title: 'Id', dataIndex: 'cantidad'},
-            { title: 'Precio', dataIndex: 'precio_venta'},
-            { title: 'Nombre', dataIndex: 'producto'}
+            { title: 'Cantidad', dataIndex: 'cantidad'},
+            { title: 'Producto', dataIndex: 'producto'},
+            { title: 'Precio unitario', dataIndex: 'precio_venta'},
+            { title: 'Precio total', dataIndex: 'precio_total'}
         ];
         const url = this.props.match.url;
         const categoriasComponent = () => (

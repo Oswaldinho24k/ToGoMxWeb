@@ -11,8 +11,10 @@ class ProductCard extends React.Component {
     }
 
     onClick = (e) => {
+        const {numeroProductos} = this.state;
         let product = Object.assign({},this.props.product);
-        product.cantidad = this.state.numeroProductos;
+        product.cantidad = numeroProductos;
+        product.precio_total = product.cantidad * product.precio_venta;
         this.props.addNewItem(product)
     };
 
