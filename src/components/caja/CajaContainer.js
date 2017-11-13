@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import * as fakeFirebase from './fakeFirebase';
 import ProductsList from './ShowProductosToSell';
-import ProductsListCards from '../inventario/ProductsList';
+import ProductsListCards from './ProductsList';
 import './CajaStyles.css';
 import ShowCategorias from "./ShowCategorias";
 import RutasLocales from "./RutasLocales";
@@ -80,11 +80,11 @@ class CajaContainer extends Component {
         let subcategorias = categoria !== '' ? this.getSubcategorias() : [];
         let subsubcategorias = subcategoria !== '' ? this.getSubSubCategorias(): [];
         let productos = subsubcategoria !== '' ? this.getProductos(): [];
-        let itemsVenta = this.state.venta.items;
+        let {venta} = this.state;
         const columnas = [
-            { title: 'Id', dataIndex: 'id'},
-            { title: 'Precio', dataIndex: 'precio'},
-            { title: 'Nombre', dataIndex: 'nombre'}
+            { title: 'Id', dataIndex: 'cantidad'},
+            { title: 'Precio', dataIndex: 'precio_venta'},
+            { title: 'Nombre', dataIndex: 'producto'}
         ];
         const url = this.props.match.url;
         const categoriasComponent = () => (
@@ -117,10 +117,11 @@ class CajaContainer extends Component {
                 <ProductsListCards
                     columnas={columnas}
                     products={this.props.products}
+                    addNewItem={this.addNewItem}
                 />
                 <ProductsList
                     columnas={columnas}
-                    productos={itemsVenta}
+                    productos={venta.items}
                 />
             </div>
         );
