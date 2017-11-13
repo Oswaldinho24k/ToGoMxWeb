@@ -8,6 +8,9 @@ import CategoriesMenu from './CategoriesMenu';
 import './inventario.css';
 import ProductsList from "./ProductsList";
 import AddProductForm from "./AddProductForm";
+import {connect} from 'react-redux';
+import * as productsActions from '../../redux/actions/productsActions';
+import {bindActionCreators} from "redux";
 
 
 class InventarioPage extends Component {
@@ -19,6 +22,9 @@ class InventarioPage extends Component {
         newProduct:{},
         updateProduct:{}
     };
+    componentWillMount(){
+
+    }
 
     handleDrawerToggle = () => this.setState({drawer: !this.state.drawer});
 
@@ -30,12 +36,22 @@ class InventarioPage extends Component {
         this.setState({addForm: false});
     };
     newProduct=()=>{
-        
+        this.props.productsActions.addNewProduct(this.state.newProduct);
+        this.handleCloseAddForm()
+
+    };
+    handleText=(e)=>{
+      let newProduct=this.state.newProduct;
+      let field = e.target.name;
+      newProduct['category'] = this.props.location.pathname;
+      newProduct[field] = e.target.value;
+      this.setState({newProduct});
+        console.log(newProduct);
     };
 
 
     render() {
-        console.log(this.props);
+        console.log(this.props)
         const params = this.props.match.params;
         const actions = [
             <FlatButton
@@ -47,7 +63,7 @@ class InventarioPage extends Component {
                 label="Submit"
                 primary={true}
                 keyboardFocused={true}
-                onClick={this.handleClose}
+                onClick={this.newProduct}
             />,
         ];
         return (
@@ -66,7 +82,7 @@ class InventarioPage extends Component {
                 iconElementRight={<IconButton><Dots /></IconButton>}
             />*/}
                 <h4>{params.cat1} / {params.cat2} / {params.cat3}</h4>
-                <ProductsList/>
+                <ProductsList products={this.props.products}/>
                 <FloatingActionButton onTouchTap={this.handleOpenAddForm} className="add-form-button">
                     <ContentAdd />
                 </FloatingActionButton>
@@ -78,11 +94,25 @@ class InventarioPage extends Component {
                     open={this.state.addForm}
                     onRequestClose={this.handleCloseAddForm}
                 >
-                   <AddProductForm/>
+                   <AddProductForm handleText={this.handleText}/>
                 </Dialog>
             </div>
         )
     }
 }
-
+function mapStateToProps(state,oP){
+    let products = state.products.filter(filtrado=>{
+        return filtrado.category===oP.location.pathname;
+    });
+    return{
+        products:products,
+        bar:state.bar,
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return{
+        productsActions:bindActionCreators(productsActions, dispatch)
+    }
+}
+InventarioPage = connect(mapStateToProps, mapDispatchToProps)(InventarioPage);
 export default InventarioPage;

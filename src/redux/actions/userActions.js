@@ -1,5 +1,6 @@
 import firebase from '../../firebase';
 import {getNotifications} from "./notificationActions";
+import {getAllProducts} from "./productsActions";
 //import toastr from 'toastr';
 //import alertify from 'alertify.js';
 
@@ -100,6 +101,8 @@ export function comprobarUsuario(){
             if(u){
                 dispatch(comprobarUsuarioAction(u));
                 dispatch(getNotifications());
+                dispatch(getAllProducts());
+
             }else{
 
             }

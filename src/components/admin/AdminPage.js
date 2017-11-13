@@ -30,7 +30,7 @@ class AdminPage extends Component {
 
 
     render() {
-        console.log(this.props.tiendas)
+        console.log(this.props.tiendas);
         return (
             <div>
                 {this.props.tiendas.map(tienda=>{

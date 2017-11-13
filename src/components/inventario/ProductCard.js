@@ -3,18 +3,18 @@ import {Card, CardText, CardTitle, CardMedia, TextField, IconButton} from 'mater
 import './inventario.css';
 import ContentAdd from 'material-ui/svg-icons/content/add-circle';
 
-const ProductCard = ({props}) => {
+const ProductCard = ({product}) => {
     return (
         <div className="inventario-card">
             <Card>
                 <CardMedia
                     mediaStyle={{maxHeight:'200px', overflow:'hidden'}}
-                    overlay={<CardTitle title="Producto" subtitle="Presentación" />}>
-                    <img src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg" alt="" />
+                    overlay={<CardTitle title={product.producto} subtitle={product.presentacion} />}>
+                    <img src="https://s3.producthunt.com/static/kitty_265x244%402x.png" alt="" />
                 </CardMedia>
                 <CardText>
-                    <p>Precio de Compra:$100</p>
-                    <p>Precio de Venta: $120</p>
+                    <p>Precio de Compra:${product.precio_compra}</p>
+                    <p>Precio de Venta: ${product.precio_venta}</p>
                     <p>Stock: 10</p>
 
                     <div className="add-item-in-card">

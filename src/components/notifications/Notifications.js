@@ -39,7 +39,7 @@ class Notifications extends Component {
         }
         return (
             <div>
-                holi
+
             </div>
         );
     }

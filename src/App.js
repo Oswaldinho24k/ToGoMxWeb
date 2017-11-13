@@ -14,6 +14,12 @@ import CategoriesMenu from './components/inventario/CategoriesMenu';
 import Notifications from "./components/notifications/Notifications";
 
 import './App.css';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import * as barActions from './redux/actions/barActions';
+
+
+
 const Logged = ({signOut, goTo}) => (
     <IconMenu
 
@@ -36,7 +42,10 @@ class App extends Component {
         addForm:false,
     };
 
-    handleDrawerToggle = () => this.setState({drawer: !this.state.drawer});
+    handleDrawerToggle = () => {
+        this.setState({drawer: !this.state.drawer});
+        this.props.barActions.changeBarStatus(!this.state.drawer)
+    };
 
     signOut = () => {
         signOut();
@@ -52,7 +61,7 @@ class App extends Component {
       <div className="App">
 
         <Drawer
-            open={this.state.drawer}
+            open={this.props.bar}
             className="drawer-categorias">
                     <span className="close-menu-button">
                         <IconButton  onTouchTap={this.handleDrawerToggle}><Close/></IconButton>
@@ -65,10 +74,25 @@ class App extends Component {
             iconElementRight={<Logged goTo={this.goTo} signOut={this.signOut} />}
         />
           <Notifications />
-       <Routes/>
+       <div className={this.props.bar?'drawer_open':'drawer_close'}>
+           <Routes/>
+       </div>
       </div>
     );
   }
 }
+
+function mapStateToProps(state,oP){
+
+    return{
+        bar:state.bar,
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return{
+        barActions:bindActionCreators(barActions, dispatch)
+    }
+}
+App = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default withRouter(App);

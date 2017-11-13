@@ -4,26 +4,19 @@ import {GridList, GridTile} from 'material-ui';
 import './inventario.css';
 
 
-const ProductsList = ({props}) => {
+const ProductsList = ({products}) => {
     return (
         <div className="lista-productos">
 
             <GridList cellHeight={'auto'} cols={4} className="grid-list">
-                <GridTile cols={1}>
-                    <ProductCard/>
-                </GridTile>
-                <GridTile cols={1}>
-                    <ProductCard/>
-                </GridTile>
-                <GridTile cols={1}>
-                    <ProductCard/>
-                </GridTile>
-                <GridTile cols={1}>
-                    <ProductCard/>
-                </GridTile>
-                <GridTile cols={1}>
-                    <ProductCard/>
-                </GridTile>
+                {products.map((p, key)=>{
+                    return(
+                        <GridTile cols={1} key={key}>
+                            <ProductCard product={p}/>
+                        </GridTile>
+                    )
+                })}
+
             </GridList>
 
         </div>
