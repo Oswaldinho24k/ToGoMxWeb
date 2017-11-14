@@ -6,7 +6,7 @@ class ProductCard extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            numeroProductos: 0
+            numeroProductos: 1
         }
     }
 

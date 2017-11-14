@@ -17,9 +17,6 @@ const Routes = () => (
         <Route path="/inventario/" component={InventarioPage}/>
         <Route path="/login" component={LoginContainer}/>
         <Route path="/registro" component={RegistroContainer}/>
-        <Route path="/caja/:cat1/:cat2/:cat3" component={CajaContainer}/>
-        <Route path="/caja/:cat1/:cat2" component={CajaContainer}/>
-        <Route path="/caja/:cat1" component={CajaContainer}/>
         <Route path="/caja" component={CajaContainer}/>
         <Route path="/perfil" component={PerfilPage} />
             <Route path="/admin" component={AdminPage}/>
