@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
 import {AppBar, Drawer, IconButton, FloatingActionButton, FlatButton, Dialog} from 'material-ui';
-import Menu from 'material-ui/svg-icons/navigation/menu';
-import Dots from 'material-ui/svg-icons/navigation/more-vert';
-import Close from 'material-ui/svg-icons/navigation/close';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import CategoriesMenu from './CategoriesMenu';
 import './inventario.css';
 import ProductsList from "./ProductsList";
 import AddProductForm from "./AddProductForm";
 import {connect} from 'react-redux';
 import * as productsActions from '../../redux/actions/productsActions';
 import {bindActionCreators} from "redux";
+import firebase from '../../firebase';
 
 
 class InventarioPage extends Component {
@@ -20,11 +17,25 @@ class InventarioPage extends Component {
         addForm:false,
         products:[],
         newProduct:{},
-        updateProduct:{}
+        updateProduct:{},
+        loader:false,
     };
-    componentWillMount(){
+    uploadPhoto=(e)=>{
+        let newProduct = this.state.newProduct;
+        let file = e.target.files[0];
+        let uploadTask = firebase.storage().ref().child('products/'+newProduct.producto+newProduct.presentacion).put(file);
+        uploadTask.then(r=>{
+            console.log(r);
+            newProduct['image']=r.downloadURL;
+            this.setState({newProduct, loader:false})
+        });
+        uploadTask.on('state_changed', snapshot=>{
+            this.setState({loader:true});
+            let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+        });
 
-    }
+    };
 
     handleDrawerToggle = () => this.setState({drawer: !this.state.drawer});
 
@@ -38,6 +49,8 @@ class InventarioPage extends Component {
     newProduct=()=>{
         this.props.productsActions.addNewProduct(this.state.newProduct);
         this.handleCloseAddForm()
+        this.setState({newProduct:{}})
+
 
     };
     handleText=(e)=>{
@@ -87,6 +100,7 @@ class InventarioPage extends Component {
                     <ContentAdd />
                 </FloatingActionButton>
                 <Dialog
+                    autoScrollBodyContent={true}
                     title="Añade un nuevo Producto"
                     actions={actions}
                     modal={false}
@@ -94,7 +108,11 @@ class InventarioPage extends Component {
                     open={this.state.addForm}
                     onRequestClose={this.handleCloseAddForm}
                 >
-                   <AddProductForm handleText={this.handleText}/>
+                   <AddProductForm
+                       handleText={this.handleText}
+                       uploadPhoto={this.uploadPhoto}
+                       loader={this.state.loader}
+                        product={this.state.newProduct}/>
                 </Dialog>
             </div>
         )
