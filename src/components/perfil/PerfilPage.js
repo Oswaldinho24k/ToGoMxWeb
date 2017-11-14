@@ -12,10 +12,12 @@ class PerfilPage extends Component{
             if(!user){
                 this.props.history.push("/login?next=/perfil");
 
+            }else{
+                const userUid = firebase.auth().currentUser.uid;
+                const userRef = firebase.database().ref("users").child(userUid);
+                misTiendasWatcher(userRef);
             }
-            const userUid = firebase.auth().currentUser.uid;
-            const userRef = firebase.database().ref("users").child(userUid);
-            misTiendasWatcher(userRef);
+
         });
 
     }
