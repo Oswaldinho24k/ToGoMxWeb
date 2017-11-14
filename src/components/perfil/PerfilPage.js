@@ -19,6 +19,7 @@ class PerfilPage extends Component{
         });
 
     }
+
     render(){
         if(!this.props.fetched) return <h2>Cargando...</h2>;
         return(

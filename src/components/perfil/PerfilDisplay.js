@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {Paper, CardHeader} from 'material-ui';
+import {Link} from 'react-router-dom';
 
 
 const bliss = "http://blog.fixter.org/content/images/2017/11/bliss-3.jpg";
@@ -68,11 +69,13 @@ export const PerfilDisplay = ({tiendas}) => {
                     {tiendas.map(t=>{
                         return(
                             <div key={t.key} className="perfil-tienda-card">
+                                <Link to={`/${t.key}`}>
                                 <Paper>
                                     <CardHeader
                                         title={t.title}
                                     />
                                 </Paper>
+                                </Link>
                             </div>
                         );
                     })}

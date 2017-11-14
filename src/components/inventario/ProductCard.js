@@ -3,7 +3,9 @@ import {Card, CardText, CardTitle, CardMedia, TextField, IconButton} from 'mater
 import './inventario.css';
 import ContentAdd from 'material-ui/svg-icons/content/add-circle';
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, onClickPlus, stock}) => {
+    //console.log(stock);
+    if(stock===undefined) stock=0;
     return (
         <div className="inventario-card">
             <Card>
@@ -20,10 +22,12 @@ const ProductCard = ({product}) => {
                     <div className="add-item-in-card">
                         <TextField
                             style={{width:'30%'}}
-                            hintText="1"
-                            type="number"/>
+                            hintText="0"
+                            type="number"
+                            value={stock}
+                        />
                         <IconButton>
-                            <ContentAdd/>
+                            <ContentAdd onClick={onClickPlus} />
                         </IconButton>
                     </div>
 

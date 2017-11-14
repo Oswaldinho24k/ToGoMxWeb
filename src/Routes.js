@@ -6,7 +6,7 @@ import LoginContainer from "./components/login/LoginContainer";
 import RegistroContainer from './components/login/RegistroContainer';
 import PerfilPage from './components/perfil/PerfilPage';
 import AdminPage from './components/admin/AdminPage';
-
+import StoreInventory from './components/storeInventory/StoreInventory';
 
 
 const Routes = () => (
@@ -19,7 +19,9 @@ const Routes = () => (
         <Route path="/registro" component={RegistroContainer}/>
         <Route path="/caja" component={CajaContainer}/>
         <Route path="/perfil" component={PerfilPage} />
-            <Route path="/admin" component={AdminPage}/>
+        <Route path="/admin" component={AdminPage}/>
+            <Route exact path="/:myStoreId" component={StoreInventory} />
+            <Route path="/:myStoreId/:cat1/:cat2/:cat3" component={StoreInventory} />
 
     </Switch>
 );

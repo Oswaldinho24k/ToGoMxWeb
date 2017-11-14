@@ -18,7 +18,7 @@ export function getTiendas(){
             .on('child_added', snap=>{
                 let n = snap.val();
                 n['key']=snap.key;
-                console.log('the snap',n);
+                //console.log('the snap',n);
 
                 dispatch(getTiendasSuccess(n))
 

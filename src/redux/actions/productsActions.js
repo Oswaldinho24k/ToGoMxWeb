@@ -13,7 +13,9 @@ export function getAllProductsSuccess(product){
 export function getAllProducts() {
     return function(dispatch, getState){
         firebase.database().ref('products').on('child_added', snap=>{
-            dispatch(getAllProductsSuccess(snap.val()))
+            let p = snap.val();
+            p["key"] = snap.key;
+            dispatch(getAllProductsSuccess(p));
         })
     }
 }
@@ -30,6 +32,7 @@ export function addNewProduct(product){
     return function(dispatch, getState){
         return firebase.database().ref('products').push(product)
             .then(r=>{
+                product["key"] = r.key;
                 dispatch(addNewProductSuccess(product))
             })
     }
