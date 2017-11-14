@@ -23,9 +23,11 @@ class Notifications extends Component {
             .cancelBtn('Nope')
             .confirm(msg,  () => {
                 console.log("voy");
+                notification['has']=true;
                 this.props.notificationsActions.markAsRead(notification);
             },  () => {
                 console.log('no voy');
+                notification['has']=false;
                 this.props.notificationsActions.markAsRead(notification);
             });
     };
