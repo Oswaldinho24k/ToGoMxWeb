@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {LoginDisplay} from './LoginDisplay';
 import firebase from '../../firebase';
 import toastr from 'toastr';
+import * as userActions from '../../redux/actions/userActions';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 
 class LoginContainer extends Component{
 
@@ -13,10 +16,32 @@ class LoginContainer extends Component{
         }
     };
 
+    decideRoute = () => {
+        const search = this.props.location.search;
+        if(search){
+            const params = new URLSearchParams(search);
+            const next = params.get('next');
+            //console.log(next);
+            if(next){
+                this.routeNext(next);
+            }
+        } else{
+            this.routeNatural();
+        }
+    };
+
+    routeNext = (next) => {
+        this.props.history.push(next);
+    };
+
+    routeNatural = () => {
+        this.props.history.push("/");
+    };
+
     componentWillMount(){
         firebase.auth().onAuthStateChanged(user=>{
             if(user){
-                this.props.history.push("/inventario");
+                this.decideRoute();
             }
         })
     }
@@ -29,17 +54,21 @@ class LoginContainer extends Component{
         this.setState({auth});
     };
 
-    onLogin = () => {
-        const auth = this.state.auth
+    onLogin = (e) => {
+        e.preventDefault();
+        const auth = this.state.auth;
         this.setState({loading:true});
-        firebase.auth().signInWithEmailAndPassword(auth.email, auth.password)
+
+        this.props.userActions.iniciarSesion(auth)
             .then(()=>{
                 toastr.success("Bienvenido");
-                this.props.history.push("/inventario");
+                //this.props.history.push("/perfil");
             })
             .catch(e=>{
                 console.log(e);
-                toastr.error("algo malo pasó ",e);
+                if(e.message === "There is no user record corresponding to this identifier. The user may have been deleted.") e.message = "Este usuario no existe, crea tu cuenta";
+                if(e.message === "The password is invalid or the user does not have a password.") e.message = "Tu contraseña no es correcta";
+                toastr.error(e.message);
                 this.setState({loading:false});
             });
     };
@@ -57,4 +86,19 @@ class LoginContainer extends Component{
     }
 }
 
+
+
+function mapStateToProps(state){
+    return{
+
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return{
+        userActions:bindActionCreators(userActions, dispatch)
+    }
+}
+
+LoginContainer = connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
 export default LoginContainer;

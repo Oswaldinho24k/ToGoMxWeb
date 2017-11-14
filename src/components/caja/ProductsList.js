@@ -1,15 +1,26 @@
 import React from 'react';
-import Table from '../common/TableFixter';
+import ProductCard from "./ProductCard";
+import {GridList, GridTile} from 'material-ui';
+import '../inventario/inventario.css';
 
-const CajaComponent = (props) => {
+
+const ProductsList = ({products, addNewItem}) => {
     return (
-        <div>
-            <Table
-                columns={props.columnas}
-                dataSource={props.productos}
-            />
+        <div className="lista-productos">
+
+            <GridList cellHeight={'auto'} cols={4} className="grid-list">
+                {products.map((p, key)=>{
+                    return(
+                        <GridTile cols={1} key={key}>
+                            <ProductCard product={p} addNewItem={addNewItem}/>
+                        </GridTile>
+                    )
+                })}
+
+            </GridList>
+
         </div>
-    );
+    )
 };
 
-export default CajaComponent;
+export default ProductsList;

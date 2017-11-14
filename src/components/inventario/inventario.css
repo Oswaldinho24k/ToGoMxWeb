@@ -43,3 +43,29 @@
     bottom: 20px;
     right:20px;
 }
+/*image class*/
+.product_image{
+    width: 100%;
+    height: 200px;
+    max-height: 200px;
+    min-height:200px;
+}
+.product_image_form{
+
+    width: 60%;
+    height: 150px;
+    max-height: 150px;
+    min-height:150px;
+
+}
+.upload_photo{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.loader_photo{
+    position: absolute;
+    top:20%;
+    left:35%;
+}
