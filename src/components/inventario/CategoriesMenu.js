@@ -4,6 +4,9 @@ import ActionGrade from 'material-ui/svg-icons/action/grade';
 import ContentInbox from 'material-ui/svg-icons/content/inbox';
 import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import ContentSend from 'material-ui/svg-icons/content/send';
+import Farm from 'material-ui/svg-icons/content/add-box';
+import Tiendita from 'material-ui/svg-icons/action/store';
+import LocalBar from 'material-ui/svg-icons/maps/local-bar';
 import {Link} from 'react-router-dom';
 
 
@@ -15,16 +18,15 @@ const CategoriesMenu = ({history, match}) => {
                 <Divider/>
                 <ListItem
                     primaryText="Tiendita"
-                    leftIcon={<ContentSend />}
+                    leftIcon={<Tiendita />}
                     disabled={true}
-
                     nestedItems={[
                         <ListItem
                             key={1}
                             primaryText="Bebidas"
                             leftIcon={<ActionGrade />}
                             disabled={true}
-
+                            nestedListStyle={{marginLeft:'20%'}}
                             nestedItems={[
                                 <Link key={1} to="/inventario/tiendita/bebidas/agua"><ListItem key={1} primaryText="Agua" leftIcon={<ContentDrafts />} /></Link>,
                                 <Link key={2} to="/inventario/tiendita/bebidas/lacteos"><ListItem key={2} primaryText="Lácteos" leftIcon={<ContentDrafts />} /></Link>,
@@ -39,13 +41,11 @@ const CategoriesMenu = ({history, match}) => {
                             primaryText="Botanas"
                             leftIcon={<ContentSend />}
                             disabled={true}
+                            nestedListStyle={{marginLeft:'20%'}}
                             nestedItems={[
-                                <ListItem
-                                    key={1}
-                                    primaryText="Papas"
-                                    leftIcon={<ContentDrafts />}/>,
-                                <ListItem key={2} primaryText="Cacahuates y más" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={3} primaryText="Panadería y Galletas" leftIcon={<ContentDrafts />} />,
+                                <Link to="/inventario/tiendita/botanas/papas"><ListItem key={1} primaryText="Papas" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/tiendita/botanas/cacahuates-y-mas"><ListItem key={2} primaryText="Cacahuates y más" leftIcon={<ContentDrafts />} /></Link>,
+                                <Link to="/inventario/tiendita/botanas/panaderia-y-galletas"><ListItem key={3} primaryText="Panadería y Galletas" leftIcon={<ContentDrafts />} /></Link>,
                             ]}
                         />,
                         <ListItem
@@ -53,10 +53,11 @@ const CategoriesMenu = ({history, match}) => {
                             primaryText="Dulcería"
                             leftIcon={<ContentInbox />}
                             disabled={true}
+                            nestedListStyle={{marginLeft:'20%'}}
                             nestedItems={[
-                                <ListItem key={1} primaryText="Chicles" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={2} primaryText="Chocolates" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={3} primaryText="Dulces" leftIcon={<ContentDrafts />} />,
+                                <Link to="/inventario/tiendita/dulceria/chicles"><ListItem key={1} primaryText="Chicles" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/tiendita/dulceria/chocolates"><ListItem key={2} primaryText="Chocolates" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/tiendita/dulceria/dulces"><ListItem key={3} primaryText="Dulces" leftIcon={<ContentDrafts />}/></Link>,
                             ]}
                         />,
                         <ListItem
@@ -64,75 +65,45 @@ const CategoriesMenu = ({history, match}) => {
                             primaryText="Abarrotes"
                             leftIcon={<ContentInbox />}
                             disabled={true}
+                            nestedListStyle={{marginLeft:'20%'}}
                             nestedItems={[
-                                <ListItem key={1} primaryText="Limpieza" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={2} primaryText="Despensa" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={3} primaryText="Higiene Personal" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={4} primaryText="Mascotas" leftIcon={<ContentDrafts />} />,
+                                <Link to="/inventario/tiendita/abarrotes/limpieza"><ListItem key={1} primaryText="Limpieza" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/tiendita/abarrotes/despensa"><ListItem key={2} primaryText="Despensa" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/tiendita/abarrotes/higiene-personal"><ListItem key={3} primaryText="Higiene Personal" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/tiendita/abarrotes/mascotas"><ListItem key={4} primaryText="Mascotas" leftIcon={<ContentDrafts />}/></Link>,
                             ]}
                         />,
                     ]}/>
                 <ListItem
                     primaryText="Farmacia"
-                    leftIcon={<ContentInbox />}
+                    leftIcon={<Farm />}
                     disabled={true}
+                    nestedListStyle={{marginLeft:'10%'}}
                     nestedItems={[
-                        <ListItem
-                            key={1}
-                            primaryText="Leches y Suplementos"
-                            leftIcon={<ActionGrade />}
-                        />,
-                        <ListItem
-                            key={2}
-                            primaryText="Mamá y Bebé"
-                            leftIcon={<ContentSend />}
-
-
-                        />,
-                        <ListItem
-                            key={3}
-                            primaryText="Medicamento OTC"
-                            leftIcon={<ContentInbox />}
-
-
-                        />,
-                        <ListItem
-                            key={4}
-                            primaryText="Pañales"
-                            leftIcon={<ContentInbox />}
-
-
-                        />,
-                        <ListItem
-                            key={5}
-                            primaryText="Salud Sexual"
-                            leftIcon={<ContentInbox />}
-
-
-                        />,
-                        <ListItem
-                            key={3}
-                            primaryText="Salud y Belleza"
-                            leftIcon={<ContentInbox />}
-                            disabled={true}
-
-                        />,
+                        <Link to="/inventario/farmacia/leches-y-suplementos"><ListItem key={1} primaryText="Leches y Suplementos" leftIcon={<ContentDrafts />}/></Link>,
+                        <Link to="/inventario/farmacia/mama-y-bebe"><ListItem key={2} primaryText="Mamá y bebé" leftIcon={<ContentDrafts />}/></Link>,
+                        <Link to="/inventario/farmacia/medicamento-otc"><ListItem key={3} primaryText="Medicamento OTC" leftIcon={<ContentDrafts />}/></Link>,
+                        <Link to="/inventario/farmacia/panales"><ListItem key={4} primaryText="Pañales" leftIcon={<ContentDrafts />}/></Link>,
+                        <Link to="/inventario/farmacia/salud-sexual"><ListItem key={5} primaryText="Salud Sexual" leftIcon={<ContentDrafts />}/></Link>,
+                         <Link to="/inventario/farmacia/salud-y-belleza"><ListItem key={6} primaryText="Salud y Belleza" leftIcon={<ContentDrafts />}/></Link>,
                     ]}
                 />
                 <ListItem
                     primaryText="Vinatería"
                     disabled={true}
-                    leftIcon={<ContentSend />}
+                    leftIcon={<LocalBar/>}
+                    nestedListStyle={{marginLeft:'10%'}}
                     nestedItems={[
                         <ListItem
                             key={1}
                             primaryText="Vinos"
                             disabled={true}
                             leftIcon={<ActionGrade />}
+                            nestedListStyle={{marginLeft:'20%'}}
                             nestedItems={[
-                                <ListItem key={1} primaryText="Vino Blanco" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={2} primaryText="Vino Tinto" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={3} primaryText="Vino Rosado" leftIcon={<ContentDrafts />} />,
+                                <Link to="/inventario/vinateria/vinos/vino-blanco"><ListItem key={1} primaryText="Vino Blanco" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/vinateria/vinos/vino-tinto"><ListItem key={2} primaryText="Vino tinto" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/vinateria/vinos/vino-rosado"><ListItem key={3} primaryText="Vino Rosado" leftIcon={<ContentDrafts />}/></Link>,
 
                             ]}
                         />,
@@ -141,30 +112,20 @@ const CategoriesMenu = ({history, match}) => {
                             primaryText="Licores"
                             leftIcon={<ContentSend />}
                             disabled={true}
+                            nestedListStyle={{marginLeft:'20%'}}
                             nestedItems={[
-                                <ListItem key={1} primaryText="Vodka" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={2} primaryText="Ron" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={3} primaryText="Whiskey" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={4} primaryText="Ginebra" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={5} primaryText="Brandy" leftIcon={<ContentDrafts />} />,
-                                <ListItem key={6} primaryText="Tequila" leftIcon={<ContentDrafts />} />,
+                                <Link to="/inventario/vinateria/licores/vodka"><ListItem key={1} primaryText="Vodka" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/vinateria/licores/ron"><ListItem key={2} primaryText="Ron" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/vinateria/licores/whiskey"><ListItem key={3} primaryText="Whiskey" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/vinateria/licores/ginebra"><ListItem key={4} primaryText="Ginebra" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/vinateria/licores/brandy"><ListItem key={5} primaryText="Brandy" leftIcon={<ContentDrafts />}/></Link>,
+                                <Link to="/inventario/vinateria/licores/tequila"><ListItem key={6} primaryText="Tequila" leftIcon={<ContentDrafts />}/></Link>,
                             ]}
                         />,
-                        <ListItem
-                            key={3}
-                            primaryText="Cervezas"
-                            leftIcon={<ContentSend />}
-
-                        />,
-                        <ListItem
-                            key={4}
-                            primaryText="Hielos"
-                            leftIcon={<ContentSend />}
-
-
-                        />,
+                        <Link to="/inventario/vinateria/cerveza"><ListItem key={3} primaryText="Cerveza" leftIcon={<ContentDrafts />}/></Link>,
+                        <Link to="/inventario/vinateria/hielo"><ListItem key={4} primaryText="Hielo" leftIcon={<ContentDrafts />}/></Link>,
                     ]}/>
-                <ListItem primaryText="Pago de Servicios" leftIcon={<ContentDrafts />}/>
+                <Link to="/inventario/pago-de-servicios"><ListItem primaryText="Pago de Servicios" leftIcon={<ContentDrafts />}/></Link>
             </List>
         </div>
     )

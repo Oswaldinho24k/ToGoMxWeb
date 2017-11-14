@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
 import * as fakeFirebase from './fakeFirebase';
-import ProductsList from './ProductsList';
+import ProductsList from './ShowProductosToSell';
+import ProductsListCards from './ProductsList';
 import './CajaStyles.css';
 import ShowCategorias from "./ShowCategorias";
 import RutasLocales from "./RutasLocales";
+import {bindActionCreators} from "redux";
+import * as productsActions from '../../redux/actions/productsActions';
+import {connect} from "react-redux";
+import {Route,Switch} from "react-router-dom";
+import ShowSubcategorias from "./ShowSubcategorias";
+import ShowSubsubcategorias from "./ShowSubsubcategorias";
 
 class CajaContainer extends Component {
     constructor(props) {
@@ -28,29 +35,8 @@ class CajaContainer extends Component {
         this.setState({venta});
     };
 
-    getSubcategorias = () => {
-        const {categoria} = this.state;
-        switch (categoria){
-            case 'tiendita':
-                return fakeFirebase.subcategoriasTiendita;
-            case 'farmacia':
-                return fakeFirebase.subcategoriasFarmacia;
-        }
-    };
 
-    getSubSubCategorias = () => {
-        const {subcategoria} = this.state
-        switch (subcategoria){
-            case 'bebidas':
-                return fakeFirebase.subcategoriasBebidas;
-            case 'botanas':
-                return fakeFirebase.subcategoriasBotanas;
-            case 'antidepresivos':
-                return fakeFirebase.subcategoriasAntidepresivos;
-            case 'anastelsicos':
-                return fakeFirebase.subcategoriasAnastelsico;
-        }
-    };
+
 
     getProductos = () => {
         const {subsubcategoria} = this.state;
@@ -60,27 +46,25 @@ class CajaContainer extends Component {
         // }
     };
     changeCategoria = (tile) => {
-        this.handleTouchPictures('categoria',tile.value);
-        this.props.history.push(this.props.match.url + '/subcategorias');
+        this.props.history.push('/caja/categorias/' + tile.value);
     };
-    changeSubcategoria = (tile) => {
-        this.handleTouchPictures('subcategoria',tile.value);
-        this.props.history.push(this.props.match.url + '/subsubcategorias');
-    };
+
     changeSubsubcategoria = (tile) => {
-        this.handleTouchPictures('subsubcategoria',tile.value);
-        this.props.history.push(this.props.match.url + '/productos');
+        console.info(this.props.location.pathname);
+        this.props.history.push(this.props.location.pathname + 'productos');
     };
+
     render() {
         const {categoria,subcategoria, subsubcategoria} = this.state;
-        let subcategorias = categoria !== '' ? this.getSubcategorias() : [];
+        //let subcategorias = categoria !== '' ? this.getSubcategorias() : [];
         let subsubcategorias = subcategoria !== '' ? this.getSubSubCategorias(): [];
         let productos = subsubcategoria !== '' ? this.getProductos(): [];
-        let itemsVenta = this.state.venta.items;
+        let {venta} = this.state;
         const columnas = [
-            { title: 'Id', dataIndex: 'id'},
-            { title: 'Precio', dataIndex: 'precio'},
-            { title: 'Nombre', dataIndex: 'nombre'}
+            { title: 'Cantidad', dataIndex: 'cantidad'},
+            { title: 'Producto', dataIndex: 'producto'},
+            { title: 'Precio unitario', dataIndex: 'precio_venta'},
+            { title: 'Precio total', dataIndex: 'precio_total'}
         ];
         const url = this.props.match.url;
         const categoriasComponent = () => (
@@ -89,34 +73,65 @@ class CajaContainer extends Component {
                 items={fakeFirebase.categorias}
             />
         );
-        const subcategoriasComponent = () => (
-            <ShowCategorias
+        const subcategoriasComponent = ({match}) => (
+            <ShowSubcategorias
                 handleChange={this.changeSubcategoria}
-                items={subcategorias}
+                match={match}
+                history={this.props.history}
+                //items={subcategorias}
             />
         );
-        const subsubcategoriaComponent = () => (
-            <ShowCategorias
+        const subsubcategoriaComponent = ({match}) => (
+            <ShowSubsubcategorias
                 handleChange={this.changeSubsubcategoria}
-                items={subsubcategorias}
+                match={match}
+                history={this.props.history}
+                location={this.props.location}
+                //items={subsubcategorias}
+            />
+        );
+        const productosComponent = ({match}) => (
+            <ProductsListCards
+                columnas={columnas}
+                products={this.props.products}
+                addNewItem={this.addNewItem}
             />
         );
         return (
             <div className="rootCajaContainer">
-                <RutasLocales
-                    onClick={this.handleTouchPictures}
-                    url={url}
-                    categoriasComponent={categoriasComponent}
-                    subcategoriasComponent={subcategoriasComponent}
-                    subsubcategoriasComponent={subsubcategoriaComponent}
-                />
+                <Switch>
+                    <Route  path='/caja/categorias/:categoria/:subcategoria/:subsubcategoria' component={productosComponent}/>
+                    <Route  path='/caja/categorias/:categoria/:subcategoria'  render={subsubcategoriaComponent}/>
+                    <Route  path='/caja/categorias/:categoria'                render={subcategoriasComponent}/>
+                    <Route  path='/caja/categorias'                           render={categoriasComponent} />
+                </Switch>
+
                 <ProductsList
                     columnas={columnas}
-                    productos={itemsVenta}
+                    productos={venta.items}
                 />
             </div>
         );
     }
 }
 
+function mapStateToProps(state,oP){
+    let pathname = oP.location.pathname;
+    pathname = pathname.replace('caja/categorias','inventario');
+    console.info('El path', pathname);
+    let products = state.products.filter(filtrado=>{
+        return filtrado.category=== pathname;
+    });
+    return{
+        products:products,
+        bar:state.bar,
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return{
+        productsActions:bindActionCreators(productsActions, dispatch)
+    }
+}
+
+CajaContainer = connect(mapStateToProps,mapDispatchToProps) (CajaContainer);
 export default CajaContainer;
