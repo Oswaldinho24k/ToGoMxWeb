@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import {BrowserRouter} from 'react-router-dom';
 import {MuiThemeProvider} from "material-ui";
 import injectTapEventPlugin from 'react-tap-event-plugin';
-//redux
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 import {configureStore} from "./redux/store/configureStore";
 import {Provider} from 'react-redux';
 import 'toastr/build/toastr.css';

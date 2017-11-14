@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+h3, p{
+    font-family: 'Lato', sans-serif;
+}
+.titulos{
+    color:#696969;
+}
+.texto{
+    color:#878787;
+}
+.sect{
+    width: 45%;
+    padding: 3%;
+
+}
+.cat{
+    display: flex;
+    width:90%;
+    margin:0 auto;
+}

@@ -1,0 +1,30 @@
+.card{
+
+    width:300px;
+    flex-grow: 1;
+    border:1px solid #EEEEEE;
+    border-radius: 4px;
+    cursor:pointer;
+    height:155px;
+    display: flex;
+    margin:10px;
+    align-items: center;
+    justify-content: center;
+}
+.card:hover{
+    box-shadow: rgba(135,152,164,0.12) 0 64px 64px -10px, rgba(135,152,164,0.1) 0 32px 32px -10px, rgba(135,152,164,0.09) 0 16px 16px -10px, rgba(135,152,164,0.07) 0 8px 8px -10px, rgba(135,152,164,0.04) 0 4px 4px -10px, ;
+}
+.img_box{
+    width:50%;
+    height:100%;
+    overflow: hidden;
+    padding: 1% 0;
+    display: flex;
+
+}
+.img_card{
+    width:auto;
+    margin:0 auto;
+    height:90%;
+    align-self: center;
+}
