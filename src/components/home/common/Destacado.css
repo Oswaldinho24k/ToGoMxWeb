@@ -1,0 +1,23 @@
+.fx{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 5%;
+}
+.destacados{
+    margin-top: 50px;
+}
+.linea{
+    width:300px;
+
+    flex-grow: 1;
+    height:12px;
+    border-bottom:2px solid #E0E0E0;
+
+
+}
+.encabezado{
+    font-size: 25px;
+    padding: 0 3%;
+.productos{
+margin-top: 50px}
+}

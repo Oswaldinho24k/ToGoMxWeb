@@ -1,0 +1,12 @@
+.btn_buy{
+    /*background-color: #F57C00;*/
+    width:120px;
+    height:35px;
+    color:white;
+    background-color: transparent;
+    border:1px solid white;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}

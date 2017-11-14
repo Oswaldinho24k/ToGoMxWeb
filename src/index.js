@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import {BrowserRouter} from 'react-router-dom';
 import {MuiThemeProvider} from "material-ui";
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 import 'toastr/build/toastr.css';
 
