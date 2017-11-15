@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './About.css';
 import FontAwesome from 'react-fontawesome';
+import iphone from '../../../assets/phone.png';
 
 import {Link} from 'react-router-dom';
 
@@ -30,38 +31,20 @@ class About extends Component {
                         <p>Recibe tu pedido</p>
                     </div>
                 </div>
-                <div className="history">
-                <div className="cart">
-                    <div className="cuadro">
-                        <div className="cover">
-                            <div className="box">
-                                <div className="raya">
-                                 <p>Nosotros</p></div>
-                            </div>
+                <div className="nos">
+                    <div className="fx largo">
+                        <div className="info">
+                            <h2>¿Falta algo en tu casa?<br/> Agrégalo ahora</h2>
+                            <p>Encuentra todos los productos que quieres, recibelos con la rapidez que necesitas y con el mejor servicio</p>
                         </div>
-                    </div>
-                </div>
-                <div className="cart">
-                    <div className="cuadro">
-                        <div className="cover">
-                            <div className="boxi">
-                                <div className="raya">
-                                    <p>Nuestra historia</p></div>
-                            </div>
+                        <div className="infor">
+                            <img src={iphone} alt=""/>
                         </div>
+
                     </div>
+
                 </div>
-                <div className="cart">
-                    <div className="cuadro">
-                        <div className="cover">
-                            <div className="boxi">
-                                <div className="raya">
-                                    <p>Responsabilidad Social</p></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             </div>
         );
     }

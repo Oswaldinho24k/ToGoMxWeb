@@ -69,7 +69,8 @@ class App extends Component {
           <CategoriesMenu match={this.props.match} history={this.props.history}/>
         </Drawer>
         <AppBar
-            title="Title"
+            style={{backgroundColor:"#FF9100"}}
+            title="TogoMx"
             iconElementLeft={<IconButton onClick={this.handleDrawerToggle}><Menu/></IconButton>}
             iconElementRight={<Logged goTo={this.goTo} signOut={this.signOut} />}
         />
