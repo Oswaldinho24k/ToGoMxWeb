@@ -10,7 +10,7 @@ const bliss = "http://blog.fixter.org/content/images/2017/11/bliss-3.jpg";
 
 export const PerfilDisplay = ({tiendas}) => {
     return (
-        <div className="gradiente">
+        <div className="">
             <div className="profile-cover">
                 <button>Cambiar Portada</button>
                <figure>
