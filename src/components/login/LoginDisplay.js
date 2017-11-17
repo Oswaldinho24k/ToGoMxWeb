@@ -15,6 +15,7 @@ export const LoginDisplay = ({loading=false, email, password, onLogin, onChange}
                     style={styles.card}>
                     <h2>Inicia Sesión</h2>
                     <div style={styles.login}>
+                        <h3 style={{color:"orange"}}>Crea una cuenta para probar el sistema!!</h3>
                         <TextField
                             onChange={onChange}
                             value={email}
@@ -36,9 +37,9 @@ export const LoginDisplay = ({loading=false, email, password, onLogin, onChange}
                             label={loading ? <CircularProgress color="white" size={30}/>:"Iniciar Sesión"}
                         />
                     </div>
-                    <span>¿Olvidaste tu contraseña?, <Link to="/registro">Recuperala</Link></span>
+                    <span>¿Olvidaste tu contraseña?, <Link style={{color:"red"}} to="/registro">Recuperala</Link></span>
                     <br/>
-                   <span>¿No tienes cuenta?, <Link to="/registro">¡Crea una!</Link></span>
+                   <span>¿No tienes cuenta?, <Link style={{color:"red"}} to="/registro">¡Crea una!</Link></span>
 
                 </Card>
             </form>

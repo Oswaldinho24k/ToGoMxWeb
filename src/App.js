@@ -29,6 +29,7 @@ const Logged = ({signOut, goTo}) => (
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
     >
+        <MenuItem onClick={()=>goTo("/caja/categorias")} primaryText="Punto de Venta" />
         <MenuItem onClick={()=>goTo("/perfil")} primaryText="Tu Perfil" />
         <MenuItem onClick={()=>goTo("/inventario")} primaryText="Tu Inventario" />
         <MenuItem onClick={signOut} primaryText="Cerrar Sesión" />
