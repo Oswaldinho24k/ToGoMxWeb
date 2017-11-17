@@ -10,6 +10,7 @@ import AdminPage from './components/admin/AdminPage';
 import StoreInventory from './components/storeInventory/StoreInventory';
 
 
+
 const Routes = () => (
     <Switch>
         <Route path="/inventario/:cat1/:cat2/:cat3" component={InventarioPage}/>
@@ -19,7 +20,7 @@ const Routes = () => (
         <Route path="/login" component={LoginContainer}/>
         <Route path="/registro" component={RegistroContainer}/>
         <Route path="/caja" component={CajaContainer}/>
-        <Route path="/home" component={Home} />
+        <Route path="/" component={Home} />
         <Route path="/perfil" component={PerfilPage} />
         <Route path="/admin" component={AdminPage}/>
             <Route exact path="/:myStoreId" component={StoreInventory} />
