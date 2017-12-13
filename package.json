@@ -33,7 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "serve": "babel-node './server/app.js'"
+    "serve": "babel-node './server/start.js'"
   },
   "babel": {
     "presets": "babel-preset-latest"

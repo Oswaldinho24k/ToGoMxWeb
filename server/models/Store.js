@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
-const Store = new Schema({
+const StoreModel = new Schema({
     firebaseKey:{
         type:String,
     },
@@ -27,4 +28,4 @@ const Store = new Schema({
     photo:String
 });
 
-export default mongoose.model("Store", Store);
+module.exports = mongoose.model("Store", StoreModel);

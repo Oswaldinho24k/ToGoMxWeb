@@ -1,25 +1,13 @@
 import express from 'express';
-import mongoose from 'mongoose';
-//models
-const PORT = 8000;
+import storeRouter from "./routes/storeRoutes";
+
 const app = express();
-
-app.get("/*", (req, res)=>{
-    res.send("perro");
+//routes
+app.get("/", (req, res)=>{
+    res.send("ToGoMX Backend");
 });
+app.use("/stores", storeRouter);
 
-//variables de entorno
-require('dotenv').config({ path: 'variables.env' });
+//export default app;
+module.exports = app;
 
-mongoose.connect(process.env.DATABASE, {useMongoClient:true});
-mongoose.Promise = global.Promise;
-mongoose.connection.on('error', (err) => {
-    console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
-});
-
-//registring models
-import * as Store from './models/Store';
-
-const server = app.listen(PORT, ()=>{
-   console.log("corriendo en el 8000");
-});
