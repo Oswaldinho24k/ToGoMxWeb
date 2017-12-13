@@ -6,10 +6,19 @@ const storeRouter = express.Router();
 
 storeRouter.route("/")
     .get((req, res)=> {
-        Store.find(stores => {
-            res.status(200).json(stores);
-            console.log(stores);
-        })
+        //if(req.query.genre) query.genre = req.query.genre;
+        const query = req.query;
+        Store.find(query, (err, stores)=>{
+            if(err) {
+                console.log(err);
+                res.status(500).send(err);
+            }else res.json(stores);
+        });
+    })
+    .post((req,res)=>{
+        const store = new Book(req.body);
+        store.save();
+        res.status(201).send(store);
     });
 
 
