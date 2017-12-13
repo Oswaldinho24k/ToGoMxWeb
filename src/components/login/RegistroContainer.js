@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {RegistroDisplay} from "./RegistroDisplay";
 import {registrarTienda} from '../../firebase';
+//import {saveMongoStore} from '../../redux/actions/stockActions';
 import toastr from 'toastr';
 
 //const NY = {
@@ -88,10 +89,18 @@ let tienda = this.state.tienda;
 
     registratTienda = (tienda) => {
         tienda["coord"] = {latitude:tienda.lat, longitude:tienda.lng};
+        tienda["location"] = {
+            type:"Point",
+            coordinates: [
+                tienda.lng, tienda.lat
+            ],
+            address:tienda.direccion
+        };
+
         registrarTienda(tienda)
             .then(r=>{
-                toastr.success("Se creó tu usuario y tienda");
-                this.props.history.push("/inventario");
+                console.log("puta r:",r);
+                this.saveMongo(r);
             })
             .catch(e=>{
                 if(e.message === "Password should be at least 6 characters") e.message = "Tu password debe contener al menos 6 caracteres";
@@ -100,6 +109,32 @@ let tienda = this.state.tienda;
                 console.log("que mierda?", e.message);
             })
     };
+
+    saveMongo(tienda){
+        const req = {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(tienda)
+        };
+        console.log("mando: ", req);
+        fetch("http://localhost:8000/stores/", req)
+            .then(response=>{
+                if(response.ok)
+                    return response.json();
+                throw new Error(response.statusText);
+            })
+            .then(data=>{
+                //console.log(data);
+                toastr.success("Se creó tu usuario y tienda");
+                //this.props.history.push("/inventario");
+            })
+            .catch(e=>{
+                console.log(e);
+                toastr.error(e.message);
+            });
+    }
 
     render(){
         const {modalOpen, tienda} = this.state;

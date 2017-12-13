@@ -9,7 +9,7 @@ const StoreModel = new Schema({
     responsable:{
         type: String
     },
-    name:{
+    title:{
         type:String
     },
     location:{
@@ -21,11 +21,13 @@ const StoreModel = new Schema({
         coordinates:[
             {
                 type:Number,
-                required:true
+                //required:true
             }
         ]
     },
-    photo:String
+    photo:String,
+    email:String,
+
 });
 
 module.exports = mongoose.model("Store", StoreModel);
