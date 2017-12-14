@@ -3,6 +3,8 @@ import storeRouter from "./routes/storeRoutes";
 import deliveryManRouter from './routes/deliveryManRoutes';
 import cors from 'cors';
 import bodyParser from 'body-parser'
+const cool = require('cool-ascii-faces');
+
 
 const app = express();
 app.use(cors());

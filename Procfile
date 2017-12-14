@@ -1,2 +1,1 @@
-web: node start.js
-x
+web: babel-node ./server/start.js

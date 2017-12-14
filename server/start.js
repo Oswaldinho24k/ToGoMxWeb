@@ -1,4 +1,5 @@
 //variables de entorno
+const cool = require('cool-ascii-faces');
 import mongoose from "mongoose";
 const PORT = 8000;
 //import app from './app';
