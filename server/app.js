@@ -1,5 +1,6 @@
 import express from 'express';
 import storeRouter from "./routes/storeRoutes";
+import deliveryManRouter from './routes/deliveryManRoutes';
 import cors from 'cors';
 import bodyParser from 'body-parser'
 
@@ -14,6 +15,7 @@ app.get("/", (req, res)=>{
 });
 
 app.use("/stores", storeRouter);
+app.use('/deliver', deliveryManRouter);
 
 //export default app;
 module.exports = app;
