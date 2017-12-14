@@ -4,30 +4,30 @@ import './inventario.css';
 
 
 
-const AddProductForm = ({handleText, uploadPhoto, product, loader}) => {
+const AddProductForm = ({handleText, uploadPhoto, name, image, category, sell_price, desc, loader, onSubmit}) => {
     return (
-        <div>
+        <form id="addproductform" onSubmit={onSubmit}>
 
             <TextField
                 onChange={handleText}
-                name="producto"
+                name="name"
                 fullWidth={true}
                 hintText="Producto"
-                value={product.producto}
+                value={name}
                 floatingLabelText="Nombre del Producto"
             /><br/>
             <TextField
                 onChange={handleText}
-                name="presentacion"
+                name="desc"
                 fullWidth={true}
-                value={product.presentacion}
+                value={desc}
                 hintText="200g"
                 floatingLabelText="Presentación"
             /><br/>
             <TextField
                 onChange={handleText}
-                value={product.precio_venta}
-                name="precio_venta"
+                value={sell_price}
+                name="sell_price"
                 fullWidth={true}
                 hintText="150"
                 floatingLabelText="Precio de Venta"
@@ -36,12 +36,12 @@ const AddProductForm = ({handleText, uploadPhoto, product, loader}) => {
                 <div className="loader_photo">
                     {loader?<CircularProgress size={80} thickness={5} />:''}
                 </div>
-                <img src={product.image} alt="" className="product_image_form"/>
+                <img src={image} alt="" className="product_image_form"/>
                 <input type="file" onChange={uploadPhoto}/>
 
             </div>
 
-        </div>
+        </form>
     )
 };
 

@@ -1,47 +1,37 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {RaisedButton} from 'material-ui';
+//import {RaisedButton} from 'material-ui';
 import * as actions from '../../redux/actions/notificationActions';
+import {FloatingActionButton, Dialog} from "material-ui";
+import FabIcon from 'material-ui/svg-icons/content/add';
+import NewProduct from './NewProduct';
+import {Link, Route} from "react-router-dom";
 
 class AdminPage extends Component {
     constructor(props, context) {
         super(props, context);
+        this.state = {
+            openAddProduct: false,
+            product: {
+
+            }
+        };
     }
 
-    enviarNoti=(key)=>{
-        let noti={
-            visto:false,
-            tiendaId:key,
-            items:[
-                {producto:'refresco',
-                cantidad:2},
-                {producto:'sabritas',
-                cantidad:5}
-            ]
-        };
-        this.props.actions.newNotification(noti)
-            .then(r=>{
-            console.log('enviada')
-        }).catch(e=>{
-            console.log(e)
-        })
-    };
 
 
     render() {
-        console.log(this.props.tiendas);
+        const {product, openAddProduct} = this.state;
         return (
             <div>
-                {this.props.tiendas.map(tienda=>{
-                    return(
-                        <div>
-                            <RaisedButton onClick={()=>this.enviarNoti(tienda.owner)}>{tienda.title}</RaisedButton>
-                            <br/>
-
-                        </div>
-                    )
-                })}
+                <Route exact path="/admin/new" component={NewProduct}/>
+                <FloatingActionButton
+                    style={{position:'fixed',bottom:25, right: 25}}
+                    containerElement={<Link to="/admin/new"/>}
+                >
+                    <FabIcon/>
+                </FloatingActionButton>
 
             </div>
         );
