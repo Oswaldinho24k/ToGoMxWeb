@@ -11,7 +11,7 @@ deliveryManRouter.route("/position")
     .post((req, res)=>{
         console.log(req.body)
         res.json(req.body)
-    })
+    });
 
 
 export default deliveryManRouter;
