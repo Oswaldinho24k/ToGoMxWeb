@@ -2,6 +2,9 @@
   "name": "togomx-web",
   "version": "0.1.0",
   "private": true,
+  "engine":{
+    "node":"8.9.0"
+  },
   "dependencies": {
     "alertify.js": "^1.0.12",
     "babel-preset-latest": "^6.24.1",
