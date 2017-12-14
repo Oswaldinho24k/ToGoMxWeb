@@ -37,3 +37,29 @@ export function addNewProduct(product){
             })
     }
 }
+
+/***************************** Save Product ******************/
+export const SAVE_PRODUCT_SUCCESS = 'SAVE_PRODUCT_SUCCESS';
+
+function saveProductSuccess(product) {
+    return {
+        type: SAVE_PRODUCT_SUCCESS,
+        product
+    }
+}
+
+export const saveProduct = (product) => (dispatch, getState) => {
+    fetch('https://togomx.herokuapp.com/products/', {
+        method: 'post' ,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+    }).then( r => {
+        if ( !r.ok ) throw new Error(r.statusText)
+        return r.json()
+    }).then( response => {
+        dispatch(saveProductSuccess(product));
+        return response;
+    });
+};
