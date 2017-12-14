@@ -17,7 +17,12 @@ require("./models/Store");
 //app
 const app = require("./app");
 
+app.set('port', process.env.PORT || 7777);
 
-app.listen(PORT, ()=>{
-    console.log("corriendo en el 8000");
+const server = app.listen(app.get('port'), () => {
+    console.log(`Express running → PORT ${server.address().port}`);
 });
+
+//app.listen(PORT, ()=>{
+  //  console.log("corriendo en el 8000");
+//});
