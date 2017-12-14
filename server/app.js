@@ -6,6 +6,8 @@ import cors from 'cors';
 import bodyParser from 'body-parser'
 const cool = require('cool-ascii-faces');
 
+const productRoutes = require('./routes/productRoutes');
+
 
 const app = express();
 app.use(cors());
@@ -20,6 +22,7 @@ app.get("/", (req, res)=>{
 app.use("/stores", storeRouter);
 app.use('/deliver', deliveryManRouter);
 app.use('/orders', orderRoutes);
+app.use('/products', productRoutes);
 //export default app;
 module.exports = app;
 

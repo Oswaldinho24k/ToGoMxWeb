@@ -13,6 +13,7 @@ mongoose.connection.on('error', (err) => {
 
 //registring models
 require("./models/Store");
+require("./models/Product");
 
 //app
 const app = require("./app");
