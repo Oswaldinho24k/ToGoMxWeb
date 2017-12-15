@@ -21,7 +21,8 @@ class CajaContainer extends Component {
             subsubcategoria: '',
             venta: {
                 items: []
-            }
+            },
+            total: 0
         };
     }
 
@@ -30,14 +31,14 @@ class CajaContainer extends Component {
     };
 
     addNewItem = (producto) => {
-        let {venta} = this.state;
+        let {venta, total} = this.state;
         let product = {...producto};
         const item = venta.items.filter( item => {
             return item._id === producto._id;
         })[0];
         if ( item !== undefined){
             item.amount += 1;
-            item.subtotal = item.amount * producto.precio_venta;
+            item.subtotal = item.amount * producto.sell_price;
             venta.items = venta.items.map( itemVenta => {
                 if ( itemVenta._id === producto._id){
                     return item
@@ -46,13 +47,37 @@ class CajaContainer extends Component {
             });
         }else{
             product.amount = 1;
-            product.subtotal  = producto.precio_venta;
+            product.subtotal  = producto.sell_price;
             venta.items.push(product);
         }
-        this.setState({venta});
+        total += producto.sell_price;
+        this.setState({venta, total});
     };
 
-
+    removeItem = (producto) => {
+        let {venta, total} = this.state;
+        const item = venta.items.filter( item => {
+            return item._id === producto._id;
+        })[0];
+        if(item !== undefined) {
+            if (item.amount > 1) {
+                item.amount -= 1;
+                item.subtotal = item.amount * producto.sell_price;
+                venta.items = venta.items.map(itemVenta => {
+                    if (itemVenta._id === producto._id) {
+                        return item
+                    }
+                    return itemVenta;
+                });
+            } else {
+                venta.items = venta.items.filter(itemVenta => {
+                    return itemVenta._id !== producto._id;
+                });
+            }
+            total -= producto.sell_price;
+        }
+        this.setState({venta, total});
+    };
 
 
     getProductos = () => {
@@ -73,7 +98,7 @@ class CajaContainer extends Component {
 
     render() {
         console.warn('Los productos:' , this.props.state);
-        const {categoria,subcategoria, subsubcategoria} = this.state;
+        const {total, subcategoria, subsubcategoria} = this.state;
         //let subcategorias = categoria !== '' ? this.getSubcategorias() : [];
         let subsubcategorias = subcategoria !== '' ? this.getSubSubCategorias(): [];
         let productos = subsubcategoria !== '' ? this.getProductos(): [];
@@ -113,6 +138,7 @@ class CajaContainer extends Component {
                 columnas={columnas}
                 products={this.props.products}
                 addNewItem={this.addNewItem}
+                removeItem={this.removeItem}
             />
         );
         return (
@@ -127,6 +153,7 @@ class CajaContainer extends Component {
                 <ProductsList
                     columns={columnas}
                     products={venta.items}
+                    total={total}
                 />
             </div>
         );

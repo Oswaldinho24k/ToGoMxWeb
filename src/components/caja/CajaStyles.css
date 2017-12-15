@@ -14,9 +14,12 @@
 }
 
 .lista-productos{
-    width: 65%;
+    height: 90%;
+    align-self: center;
+    overflow-y: auto;
+    width: 60%;
     box-sizing: border-box;
-    padding: 2%;
+    padding: 20px 2em;
 }
 
 .show_list_item_to_sell{

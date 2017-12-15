@@ -1,8 +1,27 @@
 import React from 'react';
-import Table from '../common/TableFixter';
-import {List, ListItem, Paper, RaisedButton} from 'material-ui';
+import {IconButton, IconMenu, List, ListItem, MenuItem, Paper, RaisedButton} from 'material-ui';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import {grey400} from 'material-ui/styles/colors';
 
-const CajaComponent = ({products, columns}) => {
+const iconButtonElement = (
+    <IconButton
+        touch={true}
+        tooltip="more"
+        tooltipPosition="bottom-left"
+    >
+        <MoreVertIcon color={grey400} />
+    </IconButton>
+);
+
+const rightIconMenu = (
+        <IconMenu iconButtonElement={iconButtonElement}>
+            <MenuItem>Restar elemento</MenuItem>
+            <MenuItem>Eliminar</MenuItem>
+            <MenuItem>Delete</MenuItem>
+        </IconMenu>
+);
+
+const CajaComponent = ({products, total}) => {
     let disabled = false;
     if(products.length === 0){
         disabled = true;
@@ -12,30 +31,28 @@ const CajaComponent = ({products, columns}) => {
         productsToDisplay = products.map ( ( product , key ) => {
             return <ListItem
                 key={key}
-                leftIcon={ <p>{product.amount} </p>}
-                rightIcon={ <p> $ {product.subtotal}</p> }
-                primaryText="Producto"
-                secondaryText="Categoria"
+                leftIcon={ <p style={{fontSize:'1em'}}>{product.amount}</p>}
+                rightIcon={ rightIconMenu }
+                primaryText={ product.name}
+                secondaryText={ '$ '  + product.subtotal}
             />
         });
     }
     return (
         <Paper zDepth={4} className="show_list_item_to_sell" >
-            <List style={{height:'80%', overflowY:'scroll'}}>
+            <List style={{height:'80%', overflowY:'auto', overflowX:'hidden'}}>
                 {productsToDisplay}
             </List>
             <br/>
+            {!disabled && <h3>Total: $ {total}</h3>}
             <RaisedButton
                 disabled={disabled}
-                primary={true}
+                labelColor='#FFFFFF'
+                backgroundColor="#FF9100"
                 label="Finalizar compra"
             />
         </Paper>
     );
-};
-
-CajaComponent.defaultProps = {
-    products: [{},{},{}]
 };
 
 export default CajaComponent;
