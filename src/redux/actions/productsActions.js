@@ -37,3 +37,14 @@ export function addNewProduct(product){
             })
     }
 }
+
+export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCTS_SUCCESS';
+function getProductsSuccess(products){
+    return{
+        type:GET_PRODUCTS_SUCCESS,
+        products
+    }
+}
+export const getProducts=()=>(dispatch, getState)=>{
+    return fetch()
+};
