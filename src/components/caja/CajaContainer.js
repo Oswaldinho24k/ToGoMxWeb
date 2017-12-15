@@ -31,7 +31,24 @@ class CajaContainer extends Component {
 
     addNewItem = (producto) => {
         let {venta} = this.state;
-        venta.items.push(producto);
+        let product = {...producto};
+        const item = venta.items.filter( item => {
+            return item.key === producto.key;
+        })[0];
+        if ( item !== undefined){
+            item.amount += 1;
+            item.subtotal = item.amount * producto.precio_venta;
+            venta.items = venta.items.map( itemVenta => {
+                if ( itemVenta.key === producto.key){
+                    return item
+                }
+                return itemVenta;
+            });
+        }else{
+            product.amount = 1;
+            product.subtotal  = producto.precio_venta;
+            venta.items.push(product);
+        }
         this.setState({venta});
     };
 
@@ -55,6 +72,7 @@ class CajaContainer extends Component {
     };
 
     render() {
+        console.warn('Los productos:' , this.props.state);
         const {categoria,subcategoria, subsubcategoria} = this.state;
         //let subcategorias = categoria !== '' ? this.getSubcategorias() : [];
         let subsubcategorias = subcategoria !== '' ? this.getSubSubCategorias(): [];
@@ -98,7 +116,7 @@ class CajaContainer extends Component {
             />
         );
         return (
-            <div className="rootCajaContainer">
+            <div className="rootCajaContainer" >
                 <Switch>
                     <Route  path='/caja/categorias/:categoria/:subcategoria/:subsubcategoria' component={productosComponent}/>
                     <Route  path='/caja/categorias/:categoria/:subcategoria'  render={subsubcategoriaComponent}/>
@@ -107,8 +125,8 @@ class CajaContainer extends Component {
                 </Switch>
 
                 <ProductsList
-                    columnas={columnas}
-                    productos={venta.items}
+                    columns={columnas}
+                    products={venta.items}
                 />
             </div>
         );
@@ -125,6 +143,7 @@ function mapStateToProps(state,oP){
     return{
         products:products,
         bar:state.bar,
+        state: state
     }
 }
 function mapDispatchToProps(dispatch) {

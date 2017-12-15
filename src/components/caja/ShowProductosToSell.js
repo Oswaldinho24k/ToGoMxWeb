@@ -1,27 +1,41 @@
 import React from 'react';
 import Table from '../common/TableFixter';
-import {RaisedButton} from 'material-ui';
+import {List, ListItem, Paper, RaisedButton} from 'material-ui';
 
-const CajaComponent = (props) => {
+const CajaComponent = ({products, columns}) => {
     let disabled = false;
-    if(props.productos.length === 0){
+    if(products.length === 0){
         disabled = true;
     }
-    return (
-        <div className="show_list_item_to_sell">
-            <Table
-                columns={props.columnas}
-                dataSource={props.productos}
+    let productsToDisplay = [];
+    if ( products ){
+        productsToDisplay = products.map ( ( product , key ) => {
+            return <ListItem
+                key={key}
+                leftIcon={ <p>{product.amount} </p>}
+                rightIcon={ <p> $ {product.subtotal}</p> }
+                primaryText="Producto"
+                secondaryText="Categoria"
             />
+        });
+    }
+    return (
+        <Paper zDepth={4} className="show_list_item_to_sell" >
+            <List>
+                {productsToDisplay}
+            </List>
             <br/>
             <RaisedButton
                 disabled={disabled}
-                className="finalizar_compra"
                 primary={true}
                 label="Finalizar compra"
             />
-        </div>
+        </Paper>
     );
+};
+
+CajaComponent.defaultProps = {
+    products: [{},{},{}]
 };
 
 export default CajaComponent;

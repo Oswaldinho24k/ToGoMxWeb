@@ -5,6 +5,7 @@ export function productsReducer(state=[], action){
         case ADD_NEW_PRODUCT_SUCCESS:
             return [...state];
         case GET_ALL_PRODUCTS_SUCCESS:
+            return [...state, action.product];
         case SAVE_PRODUCT_SUCCESS:
             return [...state, action.product];
         default:

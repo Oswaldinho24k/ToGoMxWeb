@@ -1,6 +1,11 @@
 .rootCajaContainer {
-    padding: 50px 5vw 5vh;
+    padding: 10px 2vw 2vh;
     box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100vw;
+    height: calc( 100vh - 64px) ;
 }
 
 .grid-list{
@@ -9,16 +14,20 @@
 }
 
 .lista-productos{
-    width: 100%;
+    width: 65%;
     box-sizing: border-box;
     padding: 2%;
 }
 
 .show_list_item_to_sell{
-    width: 80vw;
+    width: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-evenly;*/
     box-sizing: border-box;
-    margin: auto;
-    text-align: right;
+    text-align: left;
+    padding: 0 2em;
 }
 
 .finalizar_compra{

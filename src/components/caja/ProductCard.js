@@ -11,7 +11,9 @@ class ProductCard extends React.Component {
     }
 
     onClick = (e) => {
-        const {numeroProductos} = this.state;
+        let numeroProductos =  this.state.numeroProductos ;
+        numeroProductos += 1;
+        this.setState({numeroProductos});
         let product = Object.assign({},this.props.product);
         product.cantidad = numeroProductos;
         product.precio_total = product.cantidad * product.precio_venta;
@@ -30,7 +32,7 @@ class ProductCard extends React.Component {
             <div className="inventario-card">
                 <Card>
                     <CardMedia
-                        mediaStyle={{maxHeight: '200px', overflow: 'hidden'}}
+                        mediaStyle={{maxHeight: '100px', overflow: 'hidden'}}
                         overlay={<CardTitle title={product.producto} subtitle={product.presentacion}/>}>
                         <img src="https://s3.producthunt.com/static/kitty_265x244%402x.png" alt=""/>
                     </CardMedia>
