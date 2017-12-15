@@ -15,12 +15,13 @@ import '../node_modules/sweetalert2/dist/sweetalert2.min.css';
 import '../node_modules/alertify.js/src/css/alertify.css';
 import {getTiendas} from "./redux/actions/tiendasActions";
 import {comprobarUsuario} from "./redux/actions/userActions";
-import {getAllProducts} from "./redux/actions/productsActions";
+import {getAllProducts, getProducts} from "./redux/actions/productsActions";
 injectTapEventPlugin();
 
 export const store = configureStore();
 store.dispatch(comprobarUsuario());
 store.dispatch(getTiendas());
+store.dispatch(getProducts());
 
 
 const WithRouter =()=>(

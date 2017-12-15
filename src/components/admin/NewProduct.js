@@ -4,16 +4,39 @@ import {Dialog, FlatButton} from "material-ui";
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {saveProduct} from '../../redux/actions/productsActions'
+import firebase from '../../firebase';
+
+
+
 class NewProduct extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            product: {}
+            product: {
+                name:'',
+            },
+            loader:false
         };
     }
+    uploadPhoto=(e)=>{
+        let product = this.state.product;
+        let file = e.target.files[0];
+        let uploadTask = firebase.storage().ref().child('products/'+product.name+product.desc).put(file);
+        uploadTask.then(r=>{
+            console.log(r);
+            product['image']=r.downloadURL;
+            this.setState({product, loader:false})
+        });
+        uploadTask.on('state_changed', snapshot=>{
+            this.setState({loader:true});
+            let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+        });
+
+    };
 
     onChangeInput = (e) => {
-        let product = {...this.props.product || {}} ;
+        let product = {...this.state.product || {}} ;
         product[e.target.name] = e.target.value;
         this.setState({product});
         console.log(product);
@@ -33,6 +56,7 @@ class NewProduct extends Component {
         e.preventDefault();
         if (this.validateForm()) {
             this.props.saveProduct(this.state.product);
+            this.props.history.goBack()
         }
     };
 
@@ -50,7 +74,7 @@ class NewProduct extends Component {
                 form="addproductform"
                 primary={true}
                 keyboardFocused={true}
-                //onClick={this.newProduct}
+                //onClick={this.product}
             />,
         ];
         return (
@@ -62,6 +86,7 @@ class NewProduct extends Component {
                 }
                 <Dialog
                     actions={actions}
+                    autoScrollBodyContent={true}
                     open={true}
                     modal={false}
                     title="Add new product"
@@ -70,6 +95,8 @@ class NewProduct extends Component {
                     <AddProductForm
                         handleText={this.onChangeInput}
                         onSubmit={this.submitForm}
+                        uploadPhoto={this.uploadPhoto}
+                        loader={this.state.loader}
                         {...product}
                     />
                 </Dialog>

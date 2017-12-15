@@ -4,11 +4,20 @@ import './inventario.css';
 
 
 
+let elInput;
+
+function onClick() {
+    elInput.click();
+}
+
+
+
 const AddProductForm = ({handleText, uploadPhoto, name, image, category, sell_price, desc, loader, onSubmit}) => {
     return (
         <form id="addproductform" onSubmit={onSubmit}>
 
             <TextField
+                floatingLabelFixed={true}
                 onChange={handleText}
                 name="name"
                 fullWidth={true}
@@ -17,6 +26,7 @@ const AddProductForm = ({handleText, uploadPhoto, name, image, category, sell_pr
                 floatingLabelText="Nombre del Producto"
             /><br/>
             <TextField
+                floatingLabelFixed={true}
                 onChange={handleText}
                 name="desc"
                 fullWidth={true}
@@ -25,6 +35,7 @@ const AddProductForm = ({handleText, uploadPhoto, name, image, category, sell_pr
                 floatingLabelText="Presentación"
             /><br/>
             <TextField
+                floatingLabelFixed={true}
                 onChange={handleText}
                 value={sell_price}
                 name="sell_price"
@@ -36,8 +47,8 @@ const AddProductForm = ({handleText, uploadPhoto, name, image, category, sell_pr
                 <div className="loader_photo">
                     {loader?<CircularProgress size={80} thickness={5} />:''}
                 </div>
-                <img src={image} alt="" className="product_image_form"/>
-                <input type="file" onChange={uploadPhoto}/>
+                <img src={image} alt="" className="product_image_form" onClick={onClick}/>
+                <input type="file" onChange={uploadPhoto} hidden ref={input => elInput = input }/>
 
             </div>
 

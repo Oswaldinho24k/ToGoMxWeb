@@ -2,17 +2,20 @@ import React, {Component} from 'react';
 import {AppBar, Drawer, IconButton, FloatingActionButton, FlatButton, Dialog} from 'material-ui';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import './inventario.css';
-import ProductsList from "./ProductsList";
+import {ProductsList, ProducstTable} from "./ProductsList";
 import AddProductForm from "./AddProductForm";
 import {connect} from 'react-redux';
 import * as productsActions from '../../redux/actions/productsActions';
 import {bindActionCreators} from "redux";
 import firebase from '../../firebase';
+import List from 'material-ui/svg-icons/action/view-list';
+
 
 
 class InventarioPage extends Component {
 
     state={
+        vista:false,
         drawer:false,
         addForm:false,
         products:[],
@@ -61,10 +64,15 @@ class InventarioPage extends Component {
       this.setState({newProduct});
         console.log(newProduct);
     };
+    //handle products list view
+    handleView=()=>{
+        let vista = !this.state.vista;
+        this.setState({vista})
+    };
 
 
     render() {
-        console.log(this.props)
+        const {products} = this.props;
         const params = this.props.match.params;
         const actions = [
             <FlatButton
@@ -81,6 +89,22 @@ class InventarioPage extends Component {
         ];
         return (
             <div>
+                <div className={'products-manager'}>
+                    <span>
+                        <IconButton onClick={this.handleView} tooltip="Cambia la vista">
+                            <List/>
+                        </IconButton>
+                    </span>
+                    <span>Buscador</span>
+                    <span>Filtro</span>
+                </div>
+                {this.state.vista?
+                    <ProductsList products={this.props.products}/>
+                    :
+                    <ProducstTable products={this.props.products}/>
+                }
+
+
                 {/*<Drawer
                     open={this.state.drawer}
                     className="drawer-categorias">
@@ -93,10 +117,10 @@ class InventarioPage extends Component {
                 title="Title"
                 iconElementLeft={<IconButton onClick={this.handleDrawerToggle}><Menu/></IconButton>}
                 iconElementRight={<IconButton><Dots /></IconButton>}
-            />*/}
-                <h4>{params.cat1} / {params.cat2} / {params.cat3}</h4>
-                <ProductsList products={this.props.products}/>
-                <FloatingActionButton onTouchTap={this.handleOpenAddForm} className="add-form-button">
+            /> <h4>{params.cat1} / {params.cat2} / {params.cat3}</h4>*/}
+
+
+                {/*<FloatingActionButton onTouchTap={this.handleOpenAddForm} className="add-form-button">
                     <ContentAdd />
                 </FloatingActionButton>
                 <Dialog
@@ -113,17 +137,18 @@ class InventarioPage extends Component {
                        uploadPhoto={this.uploadPhoto}
                        loader={this.state.loader}
                         product={this.state.newProduct}/>
-                </Dialog>
+                </Dialog>*/}
             </div>
         )
     }
 }
 function mapStateToProps(state,oP){
+    console.log(state.products);
     let products = state.products.filter(filtrado=>{
         return filtrado.category===oP.location.pathname;
     });
     return{
-        products:products,
+        products:state.products,
         bar:state.bar,
     }
 }
