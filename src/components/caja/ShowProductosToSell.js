@@ -21,7 +21,7 @@ const CajaComponent = ({products, columns}) => {
     }
     return (
         <Paper zDepth={4} className="show_list_item_to_sell" >
-            <List>
+            <List style={{height:'80%', overflowY:'scroll'}}>
                 {productsToDisplay}
             </List>
             <br/>

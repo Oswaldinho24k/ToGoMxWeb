@@ -33,13 +33,13 @@ class CajaContainer extends Component {
         let {venta} = this.state;
         let product = {...producto};
         const item = venta.items.filter( item => {
-            return item.key === producto.key;
+            return item._id === producto._id;
         })[0];
         if ( item !== undefined){
             item.amount += 1;
             item.subtotal = item.amount * producto.precio_venta;
             venta.items = venta.items.map( itemVenta => {
-                if ( itemVenta.key === producto.key){
+                if ( itemVenta._id === producto._id){
                     return item
                 }
                 return itemVenta;
@@ -134,14 +134,14 @@ class CajaContainer extends Component {
 }
 
 function mapStateToProps(state,oP){
-    let pathname = oP.location.pathname;
-    pathname = pathname.replace('caja/categorias','inventario');
-    console.info('El path', pathname);
-    let products = state.products.filter(filtrado=>{
-        return filtrado.category=== pathname;
-    });
+    // let pathname = oP.location.pathname;
+    // pathname = pathname.replace('caja/categorias','inventario');
+    // console.info('El path', pathname);
+    // let products = state.products.filter(filtrado=>{
+    //     return filtrado.category === pathname;
+    // });
     return{
-        products:products,
+        products: state.products,
         bar:state.bar,
         state: state
     }
