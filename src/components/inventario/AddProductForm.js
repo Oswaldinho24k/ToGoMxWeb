@@ -4,30 +4,41 @@ import './inventario.css';
 
 
 
-const AddProductForm = ({handleText, uploadPhoto, product, loader}) => {
+let elInput;
+
+function onClick() {
+    elInput.click();
+}
+
+
+
+const AddProductForm = ({handleText, uploadPhoto, name, image, category, sell_price, desc, loader, onSubmit}) => {
     return (
-        <div>
+        <form id="addproductform" onSubmit={onSubmit}>
 
             <TextField
+                floatingLabelFixed={true}
                 onChange={handleText}
-                name="producto"
+                name="name"
                 fullWidth={true}
                 hintText="Producto"
-                value={product.producto}
+                value={name}
                 floatingLabelText="Nombre del Producto"
             /><br/>
             <TextField
+                floatingLabelFixed={true}
                 onChange={handleText}
-                name="presentacion"
+                name="desc"
                 fullWidth={true}
-                value={product.presentacion}
+                value={desc}
                 hintText="200g"
                 floatingLabelText="Presentación"
             /><br/>
             <TextField
+                floatingLabelFixed={true}
                 onChange={handleText}
-                value={product.precio_venta}
-                name="precio_venta"
+                value={sell_price}
+                name="sell_price"
                 fullWidth={true}
                 hintText="150"
                 floatingLabelText="Precio de Venta"
@@ -36,12 +47,12 @@ const AddProductForm = ({handleText, uploadPhoto, product, loader}) => {
                 <div className="loader_photo">
                     {loader?<CircularProgress size={80} thickness={5} />:''}
                 </div>
-                <img src={product.image} alt="" className="product_image_form"/>
-                <input type="file" onChange={uploadPhoto}/>
+                <img src={image} alt="" className="product_image_form" onClick={onClick}/>
+                <input type="file" onChange={uploadPhoto} hidden ref={input => elInput = input }/>
 
             </div>
 
-        </div>
+        </form>
     )
 };
 
