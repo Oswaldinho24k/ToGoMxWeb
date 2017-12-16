@@ -11,18 +11,23 @@ import {connect} from "react-redux";
 import {Route,Switch} from "react-router-dom";
 import ShowSubcategorias from "./ShowSubcategorias";
 import ShowSubsubcategorias from "./ShowSubsubcategorias";
+import {Dialog, RaisedButton} from "material-ui";
+import {EndSell} from "./EndSell";
 
 class CajaContainer extends Component {
     constructor(props) {
         super(props);
         this.state =  {
+            endSell: false,
             categoria: '',
             subcategoria: '',
             subsubcategoria: '',
             venta: {
                 items: []
             },
-            total: 0
+            total: 0,
+            amountEndSell:0,
+            change:0
         };
     }
 
@@ -96,9 +101,36 @@ class CajaContainer extends Component {
         this.props.history.push(this.props.location.pathname + 'productos');
     };
 
+    ////////////////////////////end sell /////////////////////////////////////
+
+    openEndSell   = ( ) => this.setState({['endSell']: true});
+    closeEndSell  = ( ) => this.setState({['endSell']: false});
+
+    onInputChange = ( e ) => {
+        this.setState({[e.target.name]:e.target.value}, prevState => {
+            let {total, change, amountEndSell} = this.state;
+            change = amountEndSell - total ;
+            this.setState({change});
+        });
+
+
+    };
+
+    actionsEndSell = [
+        <RaisedButton
+            label="Cancelar"
+            onClick={this.closeEndSell}
+        />,
+        <RaisedButton
+            label="Finalizar"
+            form="endsell"
+            type="submit"
+        />
+    ];
+
     render() {
         console.warn('Los productos:' , this.props.state);
-        const {total, subcategoria, subsubcategoria} = this.state;
+        const {total, subcategoria, subsubcategoria, endSell, amountEndSell, change} = this.state;
         //let subcategorias = categoria !== '' ? this.getSubcategorias() : [];
         let subsubcategorias = subcategoria !== '' ? this.getSubSubCategorias(): [];
         let productos = subsubcategoria !== '' ? this.getProductos(): [];
@@ -153,8 +185,25 @@ class CajaContainer extends Component {
                 <ProductsList
                     columns={columnas}
                     products={venta.items}
+                    addNewItem={this.addNewItem}
+                    removeItem={this.removeItem}
                     total={total}
+                    openEndSell={this.openEndSell}
                 />
+                <Dialog
+                    title='Finalizar compra'
+                    modal={false}
+                    open={endSell}
+                    onRequestClose={this.closeEndSell}
+                    contentStyle={{width:'40%'}}
+                    actions={this.actionsEndSell}
+                >
+                    <EndSell
+                        onInputChange={this.onInputChange}
+                        amount={amountEndSell}
+                        change={change}
+                    />
+                </Dialog>
             </div>
         );
     }

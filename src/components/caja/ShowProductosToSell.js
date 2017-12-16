@@ -2,6 +2,9 @@ import React from 'react';
 import {IconButton, IconMenu, List, ListItem, MenuItem, Paper, RaisedButton} from 'material-ui';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {grey400} from 'material-ui/styles/colors';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentSub from 'material-ui/svg-icons/content/clear';
+import ContentRem from 'material-ui/svg-icons/content/delete-sweep';
 
 const iconButtonElement = (
     <IconButton
@@ -12,16 +15,35 @@ const iconButtonElement = (
         <MoreVertIcon color={grey400} />
     </IconButton>
 );
-
-const rightIconMenu = (
-        <IconMenu iconButtonElement={iconButtonElement}>
-            <MenuItem>Restar elemento</MenuItem>
-            <MenuItem>Eliminar</MenuItem>
-            <MenuItem>Delete</MenuItem>
-        </IconMenu>
+// {/*<IconMenu iconButtonElement={iconButtonElement}>*/}
+// {/*<MenuItem>Restar elemento</MenuItem>*/}
+// {/*<MenuItem>Eliminar</MenuItem>*/}
+// {/*<MenuItem>Delete</MenuItem>*/}
+// {/*</IconMenu>*/}
+const RightIconMenu = ({addNewItem, removeItem, product}) => (
+        <div >
+            <IconButton
+                style={{position:'absolute', right: 40, top: 20}}
+                onClick={() => addNewItem(product)}
+            >
+                <ContentAdd/>
+            </IconButton>
+            <IconButton
+                style={{position:'absolute', right: 80, top: 20}}
+                onClick={ () => removeItem(product) }
+            >
+                <ContentSub/>
+            </IconButton>
+            <IconButton
+                style={{ position:'absolute', right: 0, top: 20 }}
+                onClick={ () => removeItem(product) }
+            >
+                <ContentRem/>
+            </IconButton>
+        </div>
 );
 
-const CajaComponent = ({products, total}) => {
+const CajaComponent = ({ products, total, addNewItem, removeItem, openEndSell }) => {
     let disabled = false;
     if(products.length === 0){
         disabled = true;
@@ -32,7 +54,7 @@ const CajaComponent = ({products, total}) => {
             return <ListItem
                 key={key}
                 leftIcon={ <p style={{fontSize:'1em'}}>{product.amount}</p>}
-                rightIcon={ rightIconMenu }
+                rightIcon={ <RightIconMenu addNewItem={addNewItem} removeItem={removeItem} product={product}/> }
                 primaryText={ product.name}
                 secondaryText={ '$ '  + product.subtotal}
             />
@@ -50,6 +72,7 @@ const CajaComponent = ({products, total}) => {
                 labelColor='#FFFFFF'
                 backgroundColor="#FF9100"
                 label="Finalizar compra"
+                onClick={openEndSell}
             />
         </Paper>
     );
