@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+const firebase = require('firebase');
 
 const config = {
     apiKey: "AIzaSyBcaQr-uMH7LQcFETQLiXk5LQ1WuG9nrwY",
@@ -9,31 +9,21 @@ const config = {
     messagingSenderId: "87733822528"
 };
 firebase.initializeApp(config);
-export default firebase;
-
-export async function registrarTienda(tienda){
-    const user = {
-        displayName:tienda.responsable,
-        email:tienda.email
-    };
-    //creamos el usuario
-    const r = await firebase.auth().createUserWithEmailAndPassword(tienda.email, tienda.password)
-    tienda["owner"] = r.uid;
-    //creamos la tienda
-    const tiendaKey = await firebase.database().ref("tiendas").push().key;
-    tienda["firebaseKey"] = tiendaKey;
-    await firebase.database().ref("tiendas").child(tiendaKey).set(tienda);
-    //creamos el perfil
-    user.tiendas = {[tiendaKey]:true}
-    await firebase.database().ref("users/" + r.uid).set(user);
-    //logueamos al usuario
-    await firebase.auth().signInWithEmailAndPassword(tienda.email, tienda.password);
-    return tienda;
 
 
-}
+exports.notifyStores = function(stores, order){
+    let updates = {};
+    for (let s of stores){
+        const key = firebase.database().ref("notifications").push().key;
+        updates[`/notifications/${key}`] = {
+            has:false,
+            key:key,
+            tiendaId:s.firebaseKey,
+            visto:false,
+            items:order.products
+        };
+    }
+    firebase.database().ref().update(updates);
+};
 
-export function signOut(){
-    firebase.auth().signOut();
-    localStorage.removeItem("user");
-}
+module.exports = firebase;

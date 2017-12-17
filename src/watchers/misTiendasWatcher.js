@@ -24,6 +24,7 @@ export const misTiendasWatcher = (userRef) => {
 export const productosStockWatcher = (tiendaId) => {
     firebase.database().ref("tiendas").child(tiendaId).child("products").on("value", s=>{
         //console.log(s.key);
+        if(!s.val()) return;
         let item = s.val();
         item["key"] = s.key;
         store.dispatch({

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
@@ -27,6 +27,10 @@ const StoreModel = new Schema({
     },
     photo:String,
     email:String,
+    coord:{
+        latitude:Number,
+        longitude:Number
+    }
 
 });
 

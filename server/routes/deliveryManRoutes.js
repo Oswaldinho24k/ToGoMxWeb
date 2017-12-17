@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 
 
 
@@ -9,9 +9,9 @@ deliveryManRouter.route("/position")
         res.send('hola')
     })
     .post((req, res)=>{
-        console.log(req.body)
+        //console.log(req.body)
         res.json(req.body)
     });
 
 
-export default deliveryManRouter;
+module.exports = deliveryManRouter;
