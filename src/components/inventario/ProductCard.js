@@ -14,14 +14,14 @@ const ProductCard = ({product, onClickPlus, stock}) => {
             <Card>
                 <CardMedia
                     mediaStyle={{maxHeight:'200px', overflow:'hidden'}}
-                    overlay={<CardTitle title={product.producto} subtitle={product.presentacion} />}>
+                    overlay={<CardTitle title={product.name} subtitle={product.desc} />}>
                     {product.image?
                         <img src={product.image} alt="" className="product_image"/>:
                         <img src="https://s3.producthunt.com/static/kitty_265x244%402x.png" alt="" />}
                 </CardMedia>
                 <CardText>
-                    <p>Precio de Compra:${product.precio_compra}</p>
-                    <p>Precio de Venta: ${product.precio_venta}</p>
+                    <p>Precio de Compra:${product.sell_price}</p>
+
                     <p>Stock: 10</p>
 
                     <div className="add-item-in-card">

@@ -101,7 +101,7 @@ export function comprobarUsuario(){
             if(u){
                 dispatch(comprobarUsuarioAction(u));
                 dispatch(getNotifications());
-                dispatch(getAllProducts());
+                //dispatch(getAllProducts());
 
             }else{
 

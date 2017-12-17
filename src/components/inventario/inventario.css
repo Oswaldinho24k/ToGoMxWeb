@@ -1,4 +1,25 @@
 
+.products-manager{
+    padding: 1% 3%;
+    width:100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.products-manager .view{
+    width:20%;
+}
+.products-manager .search{
+    width:50%;
+}
+.products-manager .filter{
+    width:30%;
+}
+
+
+
+
+
 .drawer-categorias{
     position: relative;
 }
@@ -52,7 +73,7 @@
     min-height:200px;
 }
 .product_image_form{
-
+    cursor: pointer;
     width: 60%;
     height: 150px;
     max-height: 150px;

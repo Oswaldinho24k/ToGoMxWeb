@@ -15,9 +15,9 @@ import StoreInventory from './components/storeInventory/StoreInventory';
 const Routes = () => (
     <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/inventario/:cat1/:cat2/:cat3" component={InventarioPage}/>
+        {/*<Route path="/inventario/:cat1/:cat2/:cat3" component={InventarioPage}/>
         <Route path="/inventario/:cat1/:cat2" component={InventarioPage}/>
-        <Route path="/inventario/:cat1" component={InventarioPage}/>
+        <Route path="/inventario/:cat1" component={InventarioPage}/>*/}
         <Route path="/inventario/" component={InventarioPage}/>
         <Route path="/login" component={LoginContainer}/>
         <Route path="/registro" component={RegistroContainer}/>

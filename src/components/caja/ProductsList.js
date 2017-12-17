@@ -4,7 +4,7 @@ import {GridList, GridTile} from 'material-ui';
 import '../inventario/inventario.css';
 
 
-const ProductsList = ({products, addNewItem}) => {
+const ProductsList = ({products, addNewItem, removeItem}) => {
     return (
         <div className="lista-productos">
 
@@ -12,7 +12,7 @@ const ProductsList = ({products, addNewItem}) => {
                 {products.map((p, key)=>{
                     return(
                         <GridTile cols={1} key={key}>
-                            <ProductCard product={p} addNewItem={addNewItem}/>
+                            <ProductCard product={p} addNewItem={addNewItem} removeItem={removeItem}/>
                         </GridTile>
                     )
                 })}

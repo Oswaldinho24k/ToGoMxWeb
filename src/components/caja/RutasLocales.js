@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
-import ProductsList from '../inventario/ProductsList';
+import {ProductsList} from '../inventario/ProductsList';
 
 const RutasLocales = ({ url, categoriasComponent,subcategoriasComponent, subsubcategoriasComponent}) => {
     const urlCategorias = url + '/categorias';

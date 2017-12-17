@@ -37,3 +37,54 @@ export function addNewProduct(product){
             })
     }
 }
+
+/***************************** Get Product ******************/
+export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCTS_SUCCESS';
+function getProductsSuccess(products){
+    return{
+        type:GET_PRODUCTS_SUCCESS,
+        products
+    }
+}
+export const getProducts = () => (dispatch, getState)=>{
+    fetch('https://togomx.herokuapp.com/products/', {
+        method:'get',
+        headers:{
+            'Content-Type':'application/json'
+        }
+    }).then(r => {
+        if(!r.ok) throw new Error(r.statusText)
+        return r.json()
+    }).then( response => {
+        console.log(response)
+        dispatch(getProductsSuccess(response));
+        return response;
+    })
+};
+
+/***************************** Save Product ******************/
+export const SAVE_PRODUCT_SUCCESS = 'SAVE_PRODUCT_SUCCESS';
+
+function saveProductSuccess(product) {
+    return {
+        type: SAVE_PRODUCT_SUCCESS,
+        product
+    }
+}
+
+export const saveProduct = (product) => (dispatch, getState) => {
+    fetch('https://togomx.herokuapp.com/products/', {
+        method: 'post' ,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+    }).then( r => {
+        if ( !r.ok ) throw new Error(r.statusText)
+        return r.json()
+    }).then( response => {
+        dispatch(saveProductSuccess(product));
+        return response;
+    });
+};
+
