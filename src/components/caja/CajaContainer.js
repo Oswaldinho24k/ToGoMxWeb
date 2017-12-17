@@ -11,8 +11,10 @@ import {connect} from "react-redux";
 import {Route,Switch} from "react-router-dom";
 import ShowSubcategorias from "./ShowSubcategorias";
 import ShowSubsubcategorias from "./ShowSubsubcategorias";
-import {Dialog, RaisedButton} from "material-ui";
+import {Dialog, IconButton, RaisedButton} from "material-ui";
 import {EndSell} from "./EndSell";
+import BackIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+import NextIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
 
 class CajaContainer extends Component {
     constructor(props) {
@@ -175,13 +177,30 @@ class CajaContainer extends Component {
         );
         return (
             <div className="rootCajaContainer" >
-                <Switch>
-                    <Route  path='/caja/categorias/:categoria/:subcategoria/:subsubcategoria' component={productosComponent}/>
-                    <Route  path='/caja/categorias/:categoria/:subcategoria'  render={subsubcategoriaComponent}/>
-                    <Route  path='/caja/categorias/:categoria'                render={subcategoriasComponent}/>
-                    <Route  path='/caja/categorias'                           render={categoriasComponent} />
-                </Switch>
-
+                <div className="lista-productos">
+                    <IconButton
+                        style={{width:60,height:60}}
+                        iconStyle={{width:60,height:40}}
+                        className="getBack"
+                        onClick={() => this.props.history.goBack()}
+                    >
+                        <BackIcon/>
+                    </IconButton>
+                    <Switch>
+                        <Route  path='/caja/categorias/:categoria/:subcategoria/:subsubcategoria' component={productosComponent}/>
+                        <Route  path='/caja/categorias/:categoria/:subcategoria'  render={subsubcategoriaComponent}/>
+                        <Route  path='/caja/categorias/:categoria'                render={subcategoriasComponent}/>
+                        <Route  path='/caja/categorias'                           render={categoriasComponent} />
+                    </Switch>
+                    <IconButton
+                        style={{width:60,height:60}}
+                        iconStyle={{width:40,height:40}}
+                        className="goAhead"
+                        onClick={() => this.props.history.goForward()}
+                    >
+                        <NextIcon/>
+                    </IconButton>
+                </div>
                 <ProductsList
                     columns={columnas}
                     products={venta.items}

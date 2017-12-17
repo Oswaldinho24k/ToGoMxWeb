@@ -3,13 +3,11 @@ import GridList from '../common/GridListFixter';
 
 const ShowCategorias = ({items, handleChange}) => {
     return (
-        <div className="lista-productos">
-            <GridList
-                tilesData={items}
-                onClick={handleChange}
-                gridListProps={gridListProps}
-            />
-        </div>
+        <GridList
+            tilesData={items}
+            onClick={handleChange}
+            gridListProps={gridListProps}
+        />
     );
 };
 
