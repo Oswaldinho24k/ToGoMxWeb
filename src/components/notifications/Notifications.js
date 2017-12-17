@@ -12,15 +12,15 @@ class Notifications extends Component {
 
     monAlert = (notification) =>{
         let itemsList = notification.items.map( (item,key) => {
-            return `<li key=${key}>${item.producto}</li>`;
+            return `<li key=${key}>${item.product.name}</li>`;
         }).join('');
         const msg = `<h3>¡Hola! ¿Tienes los siguientes productos?</h3> ` +
             `<ul>${itemsList}</ul>`;
         console.log('msg', msg);
 
         alertify
-            .okBtn('Yep')
-            .cancelBtn('Nope')
+            .okBtn('Si Tengo')
+            .cancelBtn('No Tengo')
             .confirm(msg,  () => {
                 console.log("voy");
                 notification['has']=true;
@@ -49,6 +49,7 @@ class Notifications extends Component {
 
 
 function mapStateToProps(state, ownProps) {
+    console.log('notis', state.alertas)
     return {
         notifications:state.alertas,
 

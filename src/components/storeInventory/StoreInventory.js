@@ -289,7 +289,7 @@ class StoreInventory extends Component {
 
 function mapStateToProps(state, ownProps) {
     //console.log(state.stock.stock);
-    console.log('a ver', state)
+
     return {
         stock:state.stock.stock,
         products: state.products,
