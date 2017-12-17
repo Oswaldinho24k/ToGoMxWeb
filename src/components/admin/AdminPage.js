@@ -58,14 +58,16 @@ class AdminPage extends Component {
                             onChange={this.handleSearch}/>
                     </span>
                     <span className={'filter'}>
-                        Filtro
+
                     </span>
                 </div>
-                {this.state.vista?
-                    <ProductsList products={filtered}/>
-                    :
-                    <ProducstTable products={filtered}/>
-                }
+                <div className={'admin-products-list'}>
+                    {this.state.vista?
+                        <ProductsList products={filtered}/>
+                        :
+                        <ProducstTable products={filtered}/>
+                    }
+                </div>
                 <Route exact path="/admin/new" component={NewProduct}/>
                 <FloatingActionButton
                     style={{position:'fixed',bottom:25, right: 25}}

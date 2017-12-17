@@ -24,11 +24,11 @@ export const misTiendasWatcher = (userRef) => {
 export const productosStockWatcher = (tiendaId) => {
     firebase.database().ref("tiendas").child(tiendaId).child("products").on("value", s=>{
         //console.log(s.key);
-        let item = s.val();
+        /*let item = s.val();
         item["key"] = s.key;
         store.dispatch({
             type: GET_ACTUAL_STOCK_ITEM,
             item
-        })
+        })*/
     })
 };

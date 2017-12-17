@@ -15,7 +15,9 @@
 .products-manager .filter{
     width:30%;
 }
-
+.admin-products-list{
+    padding:1% 8%
+}
 
 
 
@@ -33,7 +35,7 @@
     right:0px;
 }
 
-.lista-productos{
+.inv-lista-productos{
     width: 100%;
     box-sizing: border-box;
     padding: 2%;
