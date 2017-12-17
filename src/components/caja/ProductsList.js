@@ -6,8 +6,6 @@ import '../inventario/inventario.css';
 
 const ProductsList = ({products, addNewItem, removeItem}) => {
     return (
-        <div className="lista-productos">
-
             <GridList cellHeight={'auto'} cols={4} className="grid-list">
                 {products.map((p, key)=>{
                     return(
@@ -18,9 +16,7 @@ const ProductsList = ({products, addNewItem, removeItem}) => {
                 })}
 
             </GridList>
-
-        </div>
-    )
+    );
 };
 
 export default ProductsList;

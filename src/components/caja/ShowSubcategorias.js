@@ -17,13 +17,11 @@ const ShowSubcategorias = ({itemsCategoria, handleChange, history, match}) => {
         history.push('/caja/categorias/' + match.params.categoria + '/' + tile.value);
     };
     return (
-        <div className="lista-productos">
             <GridList
                 tilesData={items}
                 onClick={changeSubcategoria}
                 gridListProps={gridListProps}
             />
-        </div>
     );
 };
 
