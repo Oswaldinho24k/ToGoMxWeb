@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom';
 
 const bliss = "http://blog.fixter.org/content/images/2017/11/bliss-3.jpg";
 
-export const PerfilDisplay = ({tiendas}) => {
+export const PerfilDisplay = ({tiendas, displayName, email}) => {
     return (
         <div className="">
             <div className="profile-cover">
@@ -32,7 +32,7 @@ export const PerfilDisplay = ({tiendas}) => {
                             <p>Usa tu nombre real</p>
                         </label>
                         <label className="">
-                            <h5>Tu EMail</h5>
+                            <h5>Tu E-mail</h5>
                             <input placeholder="contacto@fixter.org" type="text"/>
                             <p>Lo usamos para enviarte notificaciones</p>
                         </label>

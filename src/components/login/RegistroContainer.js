@@ -99,18 +99,17 @@ let tienda = this.state.tienda;
 
         registrarTienda(tienda)
             .then(r=>{
-                console.log("puta r:",r);
-                this.saveMongo(r);
+                this.saveToMongo(r);
             })
             .catch(e=>{
                 if(e.message === "Password should be at least 6 characters") e.message = "Tu password debe contener al menos 6 caracteres";
                 if(e.message === "The email address is already in use by another account.") e.message = "Este correo electónico ya está en uso por otro usuario";
                 toastr.error(e.message);
-                console.log("que mierda?", e.message);
+                console.log("Error --- ", e.message);
             })
     };
 
-    saveMongo(tienda){
+    saveToMongo(tienda){
         const req = {
             method:"POST",
             headers:{
@@ -118,8 +117,8 @@ let tienda = this.state.tienda;
             },
             body:JSON.stringify(tienda)
         };
-        console.log("mando: ", req);
-        fetch("http://localhost:8000/stores/", req)
+        //console.log("mando: ", req);
+        fetch("https://togomx.herokuapp.com/stores/", req)
             .then(response=>{
                 if(response.ok)
                     return response.json();

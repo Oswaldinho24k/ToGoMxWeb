@@ -31,6 +31,8 @@ export default function usuarioReducer ( state = {} , action ){
         case ADD_TIENDA_TO_PROFILE_SUCCESS:
             let user = Object.assign({}, state);
             if(user["tiendas"] === undefined) user["tiendas"] = [];
+            let tienda = user.tiendas.find(t=>t.firebaseKey === action.tienda.firebaseKey);
+            if(tienda) return user;
             user["tiendas"].push(action.tienda);
             return {...user};
 
