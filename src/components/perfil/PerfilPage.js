@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {PerfilDisplay} from './PerfilDisplay';
 import firebase from '../../firebase';
 import {misTiendasWatcher} from '../../watchers';
+import {getNotifications} from "../../redux/actions/notificationActions";
 
 
 class PerfilPage extends Component{
@@ -20,6 +21,10 @@ class PerfilPage extends Component{
 
         });
 
+    }
+
+    componentWillReceiveProps(p){
+        if(p.tiendas) this.props.getNotificaions(p.tiendas[0]);
     }
 
     render(){
@@ -40,6 +45,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        getNotificaions:bindActionCreators(getNotifications,dispatch),
         actions: bindActionCreators(dispatch)
     };
 }

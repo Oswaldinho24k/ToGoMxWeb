@@ -1,4 +1,5 @@
 import firebase from '../../firebase';
+import {misTiendasWatcher} from '../../watchers';
 
 
 //Add notifications while app is done
@@ -31,24 +32,28 @@ export function getNotificationsSuccess(notification){
     }
 }
 
-export function getNotifications(){
+export function getNotifications(tienda){
     return function(dispatch, getState){
-        console.log('me ejecuto');
-        console.log(getState());
-        return firebase.database().ref('notifications')
-            //.orderByChild('tiendaId')
-            //.equalTo(getState().user.uid)
+        console.log("listener")
+        const userUid = firebase.auth().currentUser.uid;
+        //if(userUid===undefined)return
+        return firebase.database().ref("notifications")
+            .orderByChild("tiendaId")
+            .equalTo(tienda.firebaseKey)
             .on('child_added', snap=>{
-                let n = snap.val();
-                n['key']=snap.key;
-                console.log('the snap',n);
-                if (!n.visto){
-                    dispatch(getNotificationsSuccess(n))
-                }
+                console.log(snap.val())
+                        let n = snap.val();
+                        n['key']=snap.key;
+                        console.log('the snap',n);
+                        if (!n.visto){
+                            dispatch(getNotificationsSuccess(n))
+                        }
 
-        },e => {
-            console.log(e);
-        })
+                    },e => {
+                        console.log(e);
+                    });
+
+
     }
 }
 

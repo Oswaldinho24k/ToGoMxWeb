@@ -100,7 +100,7 @@ export function comprobarUsuario(){
         return firebase.auth().onAuthStateChanged((u) => {
             if(u){
                 dispatch(comprobarUsuarioAction(u));
-                dispatch(getNotifications());
+                //dispatch(getNotifications());
                 //dispatch(getAllProducts());
 
             }else{
