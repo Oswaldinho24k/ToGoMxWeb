@@ -19,7 +19,14 @@
     overflow-y: auto;
     width: 60%;
     box-sizing: border-box;
-    padding: 20px 2em;
+    padding: 20px 1em;
+    display: flex;
+}
+
+.getBack, .goAhead {
+    margin: 20px;
+    align-self: center;
+    cursor: pointer;
 }
 
 .show_list_item_to_sell{
@@ -36,4 +43,9 @@
 
 .finalizar_compra{
     text-align: right;
+}
+
+.showProductsContainer{
+    display: flex;
+    box-sizing: border-box;
 }

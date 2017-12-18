@@ -143,7 +143,7 @@ class InventarioPage extends Component {
     }
 }
 function mapStateToProps(state,oP){
-    console.log(state.products);
+
     let products = state.products.filter(filtrado=>{
         return filtrado.category===oP.location.pathname;
     });

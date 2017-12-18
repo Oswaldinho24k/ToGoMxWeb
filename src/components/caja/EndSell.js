@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextField} from 'material-ui';
 
-export const EndSell = ({ onSubmit, onInputChange: onChange, change, amount }) => {
+export const EndSell = ({ onSubmit, onInputChange: onChange, change = 0, amount = 0 }) => {
     return (
         <form id="endsell" onSubmit={onSubmit}>
             <TextField

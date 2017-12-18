@@ -26,10 +26,11 @@ export const productosStockWatcher = (tiendaId) => {
         //console.log(s.key);
         if(!s.val()) return;
         let item = s.val();
+        /*let item = s.val();
         item["key"] = s.key;
         store.dispatch({
             type: GET_ACTUAL_STOCK_ITEM,
             item
-        })
+        })*/
     })
 };

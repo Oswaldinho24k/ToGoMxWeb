@@ -17,7 +17,7 @@ const ProductCard = ({product, onClickPlus, stock}) => {
                     overlay={<CardTitle title={product.name} subtitle={product.desc} />}>
                     {product.image?
                         <img src={product.image} alt="" className="product_image"/>:
-                        <img src="https://s3.producthunt.com/static/kitty_265x244%402x.png" alt="" />}
+                        <img src="https://pbs.twimg.com/profile_images/702616676727033857/faFJSbWF.jpg" alt="" />}
                 </CardMedia>
                 <CardText>
                     <p>Precio de Compra:${product.sell_price}</p>

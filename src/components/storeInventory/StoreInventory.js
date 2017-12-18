@@ -12,11 +12,13 @@ import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import Download from 'material-ui/svg-icons/file/file-download';
 import Delete from 'material-ui/svg-icons/action/delete';
 import {indigo500} from 'material-ui/styles/colors';
-
+import {FloatingActionButton, Dialog, IconButton, TextField} from "material-ui";
 //redux
 import {stockAddOne} from "../../redux/actions/stockActions";
 //watchers
 import {productosStockWatcher} from "../../watchers/misTiendasWatcher";
+import {ProducstTable, ProductsList} from "../inventario/ProductsList";
+import ListIcon from 'material-ui/svg-icons/action/view-list';
 
 
 class StoreInventory extends Component {
@@ -25,7 +27,9 @@ class StoreInventory extends Component {
     state = {
         openDrawer:true,
         myStoreId:this.props.match.params.myStoreId,
-        items:[]
+        items:[],
+        vista:true,
+        search:''
     };
 
 
@@ -199,8 +203,20 @@ class StoreInventory extends Component {
         //console.log(cat === products[0].category);
         //console.log(items);
     };
+    handleSearch=(e)=>{
+        this.setState({search:e.target.value})
+    }
+    handleView=()=>{
+        this.setState({vista:!this.state.vista})
+    }
 
     render() {
+        const {products} = this.props;
+        const {search} = this.state;
+        const regEx = new RegExp(search,'i');
+        let filtered = products.filter(p=>{
+            return regEx.test(p.name) || regEx.test(p.desc)
+        });
         const {openDrawer} = this.state;
         const {fetched} = this.props;
         if(!fetched) return <CircularProgress/>;
@@ -227,8 +243,38 @@ class StoreInventory extends Component {
                         <ListItem primaryText="Pago de Servicios" leftIcon={<ContentCopy color={indigo500} />} />
                     </List>
                 </Drawer>
+
+
                 <h2>Productos:</h2>
                 <div style={{paddingLeft:256}}>
+                    {/*Productos de mongo db   No añade ni agrega al stock, solo se muestran los existentes*/}
+                    <div className={'products-manager'}>
+                    <span className={'view'}>
+                        <IconButton onClick={this.handleView} tooltip="Cambia la vista">
+                            <ListIcon/>
+                        </IconButton>
+                    </span>
+                        <span className={'search'}>
+                        <TextField
+                            fullWidth={true}
+                            floatingLabelFixed={true}
+                            floatingLabelText={'Buscador'}
+                            hintText={'Busca por nombre'}
+                            value={search}
+                            onChange={this.handleSearch}/>
+                    </span>
+                        <span className={'filter'}>
+
+                    </span>
+                    </div>
+                    <div className={'admin-products-list'}>
+                        {this.state.vista?
+                            <ProductsList products={filtered}/>
+                            :
+                            <ProducstTable products={filtered}/>
+                        }
+                    </div>
+
                 <Route path=":category" children={()=><StoreInventoryDisplay
                                                             stock={this.props.stock}
                                                             myStoreId={this.state.myStoreId}
@@ -243,6 +289,7 @@ class StoreInventory extends Component {
 
 function mapStateToProps(state, ownProps) {
     //console.log(state.stock.stock);
+
     return {
         stock:state.stock.stock,
         products: state.products,

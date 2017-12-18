@@ -20,8 +20,8 @@ const iconButtonElement = (
 // {/*<MenuItem>Eliminar</MenuItem>*/}
 // {/*<MenuItem>Delete</MenuItem>*/}
 // {/*</IconMenu>*/}
-const RightIconMenu = ({addNewItem, removeItem, product}) => (
-        <div >
+const RightIconMenu = ({addNewItem, removeItem, product }) => (
+        <div>
             <IconButton
                 style={{position:'absolute', right: 40, top: 20}}
                 onClick={() => addNewItem(product)}
@@ -35,6 +35,8 @@ const RightIconMenu = ({addNewItem, removeItem, product}) => (
                 <ContentSub/>
             </IconButton>
             <IconButton
+                disabled
+                title="only for demo, this button doesn't work"
                 style={{ position:'absolute', right: 0, top: 20 }}
                 onClick={ () => removeItem(product) }
             >

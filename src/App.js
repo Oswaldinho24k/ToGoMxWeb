@@ -31,7 +31,7 @@ const Logged = ({signOut, goTo}) => (
     >
         <MenuItem onClick={()=>goTo("/caja/categorias")} primaryText="Punto de Venta" />
         <MenuItem onClick={()=>goTo("/perfil")} primaryText="Tu Perfil" />
-        <MenuItem onClick={()=>goTo("/inventario")} primaryText="Tu Inventario" />
+        {/*<MenuItem onClick={()=>goTo("/inventario")} primaryText="Tu Inventario" />*/}
         <MenuItem onClick={signOut} primaryText="Cerrar Sesión" />
     </IconMenu>
 );
@@ -85,8 +85,9 @@ class App extends Component {
 }
 
 function mapStateToProps(state,oP){
-
+    console.log('admin', state)
     return{
+
         bar:state.bar,
     }
 }

@@ -14,7 +14,7 @@ import './inventario.css';
 
 export const ProductsList = ({products}) => {
     return (
-        <div className="lista-productos">
+        <div className="inv-lista-productos">
 
             <GridList cellHeight={'auto'} cols={4} className="grid-list">
                 {products.map((p, key)=>{
@@ -42,6 +42,7 @@ export const ProducstTable = ({products}) => {
                     <TableHeaderColumn>ID</TableHeaderColumn>
                     <TableHeaderColumn>Name</TableHeaderColumn>
                     <TableHeaderColumn>Sell Price</TableHeaderColumn>
+
                 </TableRow>
             </TableHeader>
 

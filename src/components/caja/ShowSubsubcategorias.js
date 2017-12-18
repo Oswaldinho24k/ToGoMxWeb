@@ -21,13 +21,11 @@ const ShowSubsubcategorias = ({itemsCategoria, handleChange, history, match, loc
     };
     const items = getSubSubCategorias();
     return (
-        <div className="lista-productos">
-            <GridList
-                tilesData={items}
-                onClick={changeSubsubcategoria}
-                gridListProps={gridListProps}
-            />
-        </div>
+        <GridList
+            tilesData={items}
+            onClick={changeSubsubcategoria}
+            gridListProps={gridListProps}
+        />
     );
 };
 
